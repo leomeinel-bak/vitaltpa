@@ -1,0 +1,15 @@
+name: VitalTrash
+version: @version@
+main: com.tamrielnetwork.vitaltrash.VitalTrash
+api-version: 1.17
+authors: [ Tamriel Network ]
+website: https://tamriel.site
+description: Gives players the ability to open a trash interface.
+commands:
+  vitaltrash:
+    description: "Main command"
+    usage: "/vitaltrash"
+permissions:
+  vitaltrash.trash:
+    description: "Permission to toggle crafting interface"
+    default: op
