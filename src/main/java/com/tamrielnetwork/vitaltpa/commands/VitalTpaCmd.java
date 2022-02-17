@@ -65,8 +65,8 @@ public class VitalTpaCmd implements TabExecutor {
 		}
 		Player player = Bukkit.getPlayer(args[1]);
 		assert player != null;
-		Utils.sendMessage(player, "tpa-received");
-		Utils.sendMessage(sender, "tpa-sent");
+		Utils.sendMessage(player, ImmutableMap.of("%player%", player.getName()), "tpa-received");
+		Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-sent");
 		doTiming(sender);
 	}
 
@@ -76,8 +76,8 @@ public class VitalTpaCmd implements TabExecutor {
 		}
 		Player player = Bukkit.getPlayer(args[1]);
 		assert player != null;
-		Utils.sendMessage(player, "tpahere-received");
-		Utils.sendMessage(sender, "tpa-sent");
+		Utils.sendMessage(player, ImmutableMap.of("%player%", player.getName()), "tpahere-received");
+		Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-sent");
 		doTiming(sender);
 	}
 
