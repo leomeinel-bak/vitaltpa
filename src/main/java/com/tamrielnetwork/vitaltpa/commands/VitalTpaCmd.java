@@ -99,8 +99,8 @@ public class VitalTpaCmd implements TabExecutor {
 		Player player = Objects.requireNonNull(getPlayer(sender));
 		if (cancel) {
 			clearMaps(player);
-			Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-no");
-			Utils.sendMessage(player, ImmutableMap.of("%player%", player.getName()), "tpa-denied");
+			Utils.sendMessage(sender, ImmutableMap.of("%player%", sender.getName()), "tpa-no");
+			Utils.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-denied");
 			return;
 		}
 		if (!sender.hasPermission("vitaltpa.tpyes")) {
@@ -116,8 +116,8 @@ public class VitalTpaCmd implements TabExecutor {
 				break;
 			}
 		}
-		Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-yes");
-		Utils.sendMessage(player, ImmutableMap.of("%player%", player.getName()), "tpa-accepted");
+		Utils.sendMessage(sender, ImmutableMap.of("%player%", sender.getName()), "tpa-yes");
+		Utils.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-accepted");
 	}
 
 	private void doTpa(@NotNull CommandSender sender, @NotNull Player player) {
