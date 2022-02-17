@@ -106,7 +106,7 @@ To get the plugin running on your server follow these simple steps.
 
 ```
 # time in seconds
-request-expiry: 60```
+request-expiry: 60
 ```
 
 ### Configuration - messages.yml
