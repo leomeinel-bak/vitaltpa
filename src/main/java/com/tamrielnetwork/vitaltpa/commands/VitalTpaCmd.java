@@ -99,7 +99,7 @@ public class VitalTpaCmd implements TabExecutor {
 		Player player = Objects.requireNonNull(getPlayer(sender));
 		if (cancel) {
 			clearMaps(player);
-			Utils.sendMessage(sender, ImmutableMap.of("%player%", sender.getName()), "tpa-no");
+			Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-no");
 			Utils.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-denied");
 			return;
 		}
@@ -116,7 +116,7 @@ public class VitalTpaCmd implements TabExecutor {
 				break;
 			}
 		}
-		Utils.sendMessage(sender, ImmutableMap.of("%player%", sender.getName()), "tpa-yes");
+		Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-yes");
 		Utils.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-accepted");
 	}
 
@@ -124,12 +124,12 @@ public class VitalTpaCmd implements TabExecutor {
 		for (Map.Entry<HashMap<UUID,UUID>, String> tpEntry : tpMap.entrySet()) {
 			if (tpEntry.getValue().equals("tpa")) {
 				player.teleport(((Player) sender).getLocation());
-				Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-done");
+				Utils.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-done");
 				return;
 			}
 			if (tpEntry.getValue().equals("tpahere")) {
 				((Player) sender).teleport(player.getLocation());
-				Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpahere-done");
+				Utils.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpahere-done");
 				return;
 			}
 			break;
