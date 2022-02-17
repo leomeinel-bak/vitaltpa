@@ -59,31 +59,32 @@ public class VitalTpaCmd implements TabExecutor {
 		return true;
 	}
 
-	public void requestTpa(CommandSender sender, String[] args) {
+	public void requestTpa(@NotNull CommandSender sender, @NotNull String[] args) {
 		if (isInvalidTpa(sender, args, "vitaltpa.tpa")) {
 			return;
 		}
+		addToMap(sender, args);
 		Player player = Bukkit.getPlayer(args[1]);
 		assert player != null;
-		Utils.sendMessage(player, ImmutableMap.of("%player%", player.getName()), "tpa-received");
+		Utils.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-received");
 		Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-sent");
 		doTiming(sender);
 	}
 
-	public void requestTpaHere(CommandSender sender, String[] args) {
+	public void requestTpaHere(@NotNull CommandSender sender, @NotNull String[] args) {
 		if (isInvalidTpa(sender, args, "vitaltpa.tpahere")) {
 			return;
 		}
+		addToMap(sender, args);
 		Player player = Bukkit.getPlayer(args[1]);
 		assert player != null;
-		Utils.sendMessage(player, ImmutableMap.of("%player%", player.getName()), "tpahere-received");
+		Utils.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpahere-received");
 		Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-sent");
 		doTiming(sender);
 	}
 
-	public void doTpRequest(Boolean cancel, CommandSender sender, String[] args) {
+	public void doTpRequest(@NotNull Boolean cancel, @NotNull CommandSender sender, @NotNull String[] args) {
 		if (args.length > 1) {
-			clearMaps(sender);
 			Utils.sendMessage(sender, "invalid-option");
 			return;
 		}
@@ -91,34 +92,35 @@ public class VitalTpaCmd implements TabExecutor {
 			Utils.sendMessage(sender, "no-perms");
 			return;
 		}
+		if (!tpPlayerMap.containsValue(((Player) sender).getUniqueId())) {
+			Utils.sendMessage(sender, "no-request");
+			return;
+		}
+		Player player = Objects.requireNonNull(getPlayer(sender));
 		if (cancel) {
-			clearMaps(sender);
-			Utils.sendMessage(sender, "tpa-denied");
+			clearMaps(player);
+			Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-no");
+			Utils.sendMessage(player, ImmutableMap.of("%player%", player.getName()), "tpa-denied");
 			return;
 		}
 		if (!sender.hasPermission("vitaltpa.tpyes")) {
 			Utils.sendMessage(sender, "no-perms");
 			return;
 		}
-		if (!tpPlayerMap.containsKey(((Player) sender).getUniqueId())) {
-			Utils.sendMessage(sender, "no-request");
-			return;
-		}
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
 			if (uuidEntry.getValue().equals(((Player) sender).getUniqueId())) {
-				Player player = Bukkit.getPlayer(uuidEntry.getKey());
-				assert player != null;
 				TpaEvent event = new TpaEvent(player, player.getLocation());
 				Bukkit.getPluginManager().callEvent(event);
 				doTpa(sender, player);
-				clearMaps(Bukkit.getPlayer(uuidEntry.getKey()));
+				clearMaps(Objects.requireNonNull(Bukkit.getPlayer(uuidEntry.getKey())));
 				break;
 			}
 		}
-		Utils.sendMessage(sender, "tpa-accepted");
+		Utils.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-yes");
+		Utils.sendMessage(player, ImmutableMap.of("%player%", player.getName()), "tpa-accepted");
 	}
 
-	private void doTpa(CommandSender sender, Player player) {
+	private void doTpa(@NotNull CommandSender sender, @NotNull Player player) {
 		for (Map.Entry<HashMap<UUID,UUID>, String> tpEntry : tpMap.entrySet()) {
 			if (tpEntry.getValue().equals("tpa")) {
 				player.teleport(((Player) sender).getLocation());
@@ -134,7 +136,7 @@ public class VitalTpaCmd implements TabExecutor {
 		}
 	}
 
-	private boolean isInvalidTpa(CommandSender sender, String[] args, String perm) {
+	private boolean isInvalidTpa(@NotNull CommandSender sender, @NotNull String[] args, @NotNull String perm) {
 		if (args.length > 2) {
 			Utils.sendMessage(sender, "invalid-option");
 			return true;
@@ -149,51 +151,58 @@ public class VitalTpaCmd implements TabExecutor {
 			Utils.sendMessage(sender, "no-perms");
 			return true;
 		}
-		if (isInValidPlayer(sender, args)) {
-			return true;
-		}
+		return isInValidPlayer(sender, args);
+	}
+
+	private void addToMap (@NotNull CommandSender sender, @NotNull String [] args) {
 		Player player = Bukkit.getPlayer(args[1]);
 		assert player != null;
 		if (tpPlayerMap.containsKey(((Player) sender).getUniqueId())) {
 			Utils.sendMessage(sender, "active-tpa");
-			return true;
+			return;
 		}
 		tpPlayerMap.put(((Player) sender).getUniqueId(), player.getUniqueId());
-		if (Objects.equals(args[0], "tpa")) {
-			tpMap.put(tpPlayerMap, "tpa");
-			return false;
+		switch (args[0]) {
+			case "tpa" -> tpMap.put(tpPlayerMap, "tpa");
+			case "tpahere" -> tpMap.put(tpPlayerMap, "tpahere");
+			default -> Utils.sendMessage(sender, "invalid-option");
 		}
-		if (Objects.equals(args[0], "tpahere")) {
-			tpMap.put(tpPlayerMap, "tpahere");
-		}
-		return false;
 	}
 
-	private boolean isInValidPlayer(CommandSender sender, String[] args) {
+	private boolean isInValidPlayer(@NotNull CommandSender sender, @NotNull String[] args) {
 		if (Bukkit.getPlayer(args[1]) == null || Bukkit.getPlayer(args[1]) == sender) {
 			Utils.sendMessage(sender, "invalid-player");
 			return true;
 		}
-		Player player = Bukkit.getPlayer(args[1]);
-		if (!Objects.requireNonNull(player).isOnline()) {
+		if (!Objects.requireNonNull(Bukkit.getPlayer(args[1])).isOnline()) {
 			Utils.sendMessage(sender, "not-online");
 			return true;
 		}
 		return false;
 	}
 
-	private void doTiming(CommandSender sender) {
+	private void doTiming(@NotNull CommandSender sender) {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
 				clearMaps(sender);
 			}
-		}.runTaskLaterAsynchronously(main, main.getConfig().getLong("request-expiry"));
+		}.runTaskLaterAsynchronously(main, (main.getConfig().getLong("request-expiry")*20L));
 	}
 
-	private void clearMaps(CommandSender sender) {
+	private void clearMaps(@NotNull CommandSender sender) {
 		tpMap.remove(tpPlayerMap);
 		tpPlayerMap.remove(((Player) sender).getUniqueId());
+	}
+
+	private Player getPlayer(@NotNull CommandSender sender) {
+		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
+			if (uuidEntry.getValue().equals(((Player) sender).getUniqueId())) {
+				return Bukkit.getPlayer(uuidEntry.getKey());
+			}
+		}
+		Bukkit.getLogger().severe("VitalTpa returned player as null");
+		return null;
 	}
 
 	@Override

@@ -1,2 +1,2 @@
-# time in ms
-request-expiry: 60000
+# time in seconds
+request-expiry: 60
