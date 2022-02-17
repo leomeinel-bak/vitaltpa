@@ -105,7 +105,8 @@ To get the plugin running on your server follow these simple steps.
 ### Configuration - config.yml
 
 ```
-request-expiry: 60
+# time in seconds
+request-expiry: 60```
 ```
 
 ### Configuration - messages.yml
@@ -117,15 +118,17 @@ invalid-option: "&cInvalid option!"
 no-perms: "&7You don't have enough permissions!"
 invalid-player: "&cInvalid player!"
 not-online: "&cPlayer is not online!"
-tpa-sent: "&7Sent tp request to %player%"
-tpa-received: "&7You got tpa"
-tpa-done: "&7Teleported to %player%"
-tpahere-done: "&7Teleported %player% to you"
-tpahere-received: "&7You got tpahere"
-active-tpa: "&7You got an active request"
-tpa-accepted: "&7Accepted tpa"
-tpa-denied: "&7Denied tpa"
-no-request: "&7You don't have an active request"
+tpa-sent: "&7Sent teleport request to &b%player%"
+tpa-received: "&7You got a teleport request from &b%player%"
+tpa-done: "&7Teleported to &b%player%"
+tpahere-done: "&7Teleported &b%player%"
+tpahere-received: "&7You got a teleport request from &b%player%"
+active-tpa: "&7You already have an active teleport request"
+tpa-yes: "&7Accepted teleport request from &b%player%"
+tpa-accepted: "&b%player% &7accepted your teleport request"
+tpa-no: "&7Denied teleport request from &b%player%"
+tpa-denied: "&b%player% &7denied your teleport request"
+no-request: "&7You currently do not have an open teleport request"
 ```
 
 <!-- ROADMAP -->
