@@ -84,12 +84,12 @@ To get the plugin running on your server follow these simple steps.
 
 ### Commands and Permissions
 
-1. Permission: `vitaltp.tp`
+1. Permission: `vitaltpa.tpa`
 
 * Command: `/vitaltpa tpa <player>`
 * Description: Send request to teleport to others
 
-2. Permission: `vitaltp.tphere`
+2. Permission: `vitaltpa.tpahere`
 
 * Command: `/vitaltpa tpahere <player>`
 * Description: Send request to teleport others to you
