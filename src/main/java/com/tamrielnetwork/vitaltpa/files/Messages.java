@@ -1,5 +1,5 @@
 /*
- * VitalTpa is a Spigot Plugin that gives players the ability to ask players to teleport to them.
+ * VitalTpa is a Spigot Plugin that gives players the ability to teleport to each other.
  * Copyright © 2022 Leopold Meinel
  *
  * This program is free software: you can redistribute it and/or modify
@@ -13,12 +13,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see https://github.com/TamrielNetwork/VitalTpa/blob/main/LICENSE
+ * along with this program. If not, see https://github.com/TamrielNetwork/VitalTp/blob/main/LICENSE
  */
 
-package com.tamrielnetwork.vitaltrash.files;
+package com.tamrielnetwork.vitaltpa.files;
 
-import com.tamrielnetwork.vitaltrash.VitalTrash;
+import com.tamrielnetwork.vitaltpa.VitalTpa;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,7 +27,7 @@ import java.io.File;
 
 public class Messages {
 
-	private final VitalTrash main = JavaPlugin.getPlugin(VitalTrash.class);
+	private final VitalTpa main = JavaPlugin.getPlugin(VitalTpa.class);
 	private final File messagesFile;
 	private final FileConfiguration messagesConf;
 

@@ -1,15 +1,24 @@
-name: VitalTrash
+name: VitalTpa
 version: @version@
-main: com.tamrielnetwork.vitaltrash.VitalTrash
+main: com.tamrielnetwork.vitaltpa.VitalTpa
 api-version: 1.17
 authors: [ Tamriel Network ]
 website: https://tamriel.site
-description: Gives players the ability to open a trash interface.
+description: Gives players the ability to teleport to each other.
 commands:
-  vitaltrash:
+  vitaltpa:
     description: "Main command"
-    usage: "/vitaltrash"
+    usage: "/vitaltpa tp/tphere <player>"
 permissions:
-  vitaltrash.trash:
-    description: "Permission to toggle crafting interface"
+  vitaltpa.tpa:
+    description: "Permission to send request to teleport to others"
+    default: op
+  vitaltpa.tpahere:
+    description: "Permission to send request to teleport others to you"
+    default: op
+  vitaltpa.tpyes:
+    description: "Permission to accept teleport request"
+    default: op
+  vitaltpa.tpno:
+    description: "Permission to deny teleport request"
     default: op

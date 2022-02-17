@@ -10,23 +10,23 @@
 <!--suppress ALL -->
 <br />
 <p align="center">
-  <a href="https://github.com/TamrielNetwork/VitalTrash">
+  <a href="https://github.com/TamrielNetwork/VitalTpa">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">VitalTrash</h3>
+<h3 align="center">VitalTpa</h3>
 
   <p align="center">
-    Open a trash interface on Spigot and Paper
+    Teleport on Spigot and Paper
     <br />
-    <a href="https://github.com/TamrielNetwork/VitalTrash"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/TamrielNetwork/VitalTpa"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/TamrielNetwork/VitalTrash">View Demo</a>
+    <a href="https://github.com/TamrielNetwork/VitalTpa">View Demo</a>
     ·
-    <a href="https://github.com/TamrielNetwork/VitalTrash/issues">Report Bug</a>
+    <a href="https://github.com/TamrielNetwork/VitalTpa/issues">Report Bug</a>
     ·
-    <a href="https://github.com/TamrielNetwork/VitalTrash/issues">Request Feature</a>
+    <a href="https://github.com/TamrielNetwork/VitalTpa/issues">Request Feature</a>
   </p>
 
 <!-- TABLE OF CONTENTS -->
@@ -62,13 +62,14 @@
 
 ### Description
 
-VitalTrash is a Plugin that gives players the ability to open a trash interface.
+VitalTpa is a Plugin that gives players the ability to teleport to each other.
 
-This plugin is perfect for any server wanting their players to dispose items on the go.
+This plugin is perfect for any server wanting their players to have an easy way of teleporting.
 
 ### Features
 
-* Open Trash interface
+* Teleport to others
+* Teleport others to you
 
 ### Built With
 
@@ -83,10 +84,15 @@ To get the plugin running on your server follow these simple steps.
 
 ### Commands and Permissions
 
-1. Permission: `vitaltrash.trash`
+1. Permission: `vitaltp.tp`
 
-* Command: `/vitaltrash`
-* Description: Toggle trash interface
+* Command: `/vitaltp tp <player>`
+* Description: Teleport to others
+
+2. Permission: `vitaltp.tphere`
+
+* Command: `/vitaltp tphere`
+* Description: Teleport others to you
 
 ### Configuration - config.yml
 
@@ -105,7 +111,7 @@ no-perms: "&7You don't have enough permissions!"
 
 ## Roadmap
 
-See the [open issues](https://github.com/TamrielNetwork/VitalTrash/issues) for a list of proposed features (and known
+See the [open issues](https://github.com/TamrielNetwork/VitalTpa/issues) for a list of proposed features (and known
 issues).
 
 <!-- CONTRIBUTING -->
@@ -135,7 +141,7 @@ Leopold Meinel - [@TamrielN](https://twitter.com/TamrielN) - Twitter
 
 Leopold Meinel - [contact@tamriel.me](mailto:contact@tamriel.me) - eMail
 
-Project Link - [VitalTrash](https://github.com/TamrielNetwork/VitalTrash) - GitHub
+Project Link - [VitalTpa](https://github.com/TamrielNetwork/VitalTpa) - GitHub
 
 <!-- ACKNOWLEDGEMENTS -->
 
@@ -145,26 +151,26 @@ Project Link - [VitalTrash](https://github.com/TamrielNetwork/VitalTrash) - GitH
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors-anon/TamrielNetwork/VitalTrash?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors-anon/TamrielNetwork/VitalTpa?style=for-the-badge
 
-[contributors-url]: https://github.com/TamrielNetwork/VitalTrash/graphs/contributors
+[contributors-url]: https://github.com/TamrielNetwork/VitalTpa/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/TamrielNetwork/VitalTrash?label=Forks&style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/TamrielNetwork/VitalTpa?label=Forks&style=for-the-badge
 
-[forks-url]: https://github.com/TamrielNetwork/VitalTrash/network/members
+[forks-url]: https://github.com/TamrielNetwork/VitalTpa/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/TamrielNetwork/VitalTrash?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/TamrielNetwork/VitalTpa?style=for-the-badge
 
-[stars-url]: https://github.com/TamrielNetwork/VitalTrash/stargazers
+[stars-url]: https://github.com/TamrielNetwork/VitalTpa/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/TamrielNetwork/VitalTrash?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/TamrielNetwork/VitalTpa?style=for-the-badge
 
-[issues-url]: https://github.com/TamrielNetwork/VitalTrash/issues
+[issues-url]: https://github.com/TamrielNetwork/VitalTpa/issues
 
-[license-shield]: https://img.shields.io/github/license/TamrielNetwork/VitalTrash?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/TamrielNetwork/VitalTpa?style=for-the-badge
 
-[license-url]: https://github.com/TamrielNetwork/VitalTrash/blob/main/LICENSE
+[license-url]: https://github.com/TamrielNetwork/VitalTpa/blob/main/LICENSE
 
-[quality-shield]: https://img.shields.io/codefactor/grade/github/TamrielNetwork/VitalTrash?style=for-the-badge
+[quality-shield]: https://img.shields.io/codefactor/grade/github/TamrielNetwork/VitalTpa?style=for-the-badge
 
-[quality-url]: https://www.codefactor.io/repository/github/TamrielNetwork/VitalTrash
+[quality-url]: https://www.codefactor.io/repository/github/TamrielNetwork/VitalTpa
