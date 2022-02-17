@@ -17,7 +17,7 @@
 <h3 align="center">VitalTpa</h3>
 
   <p align="center">
-    Teleport on Spigot and Paper
+    Ask for teleport on Spigot and Paper
     <br />
     <a href="https://github.com/TamrielNetwork/VitalTpa"><strong>Explore the docs »</strong></a>
     <br />
@@ -62,14 +62,14 @@
 
 ### Description
 
-VitalTpa is a Plugin that gives players the ability to teleport to each other.
+VitalTpa is a Plugin that gives players the ability to ask players to teleport to them.
 
-This plugin is perfect for any server wanting their players to have an easy way of teleporting.
+This plugin is perfect for any server wanting their players to have an easy way of sending teleport requests.
 
 ### Features
 
-* Teleport to others
-* Teleport others to you
+* Send request to teleport to others
+* Send request to teleport others to you
 
 ### Built With
 
@@ -86,25 +86,46 @@ To get the plugin running on your server follow these simple steps.
 
 1. Permission: `vitaltp.tp`
 
-* Command: `/vitaltp tp <player>`
-* Description: Teleport to others
+* Command: `/vitaltpa tpa <player>`
+* Description: Send request to teleport to others
 
 2. Permission: `vitaltp.tphere`
 
-* Command: `/vitaltp tphere`
-* Description: Teleport others to you
+* Command: `/vitaltpa tpahere <player>`
+* Description: Send request to teleport others to you
+
+3. Permission: `vitaltpa.tpyes`
+
+* Description: Accept teleport request
+
+4. Permission: `vitaltpa.tpno`
+
+* Description: Deny teleport request
 
 ### Configuration - config.yml
 
 ```
+request-expiry: 60
 ```
 
 ### Configuration - messages.yml
 
 ```
+no-args: "&7Enter this command: &b/vitaltpa tpa/tpahere <player>"
 player-only: "&cThis command can only be executed by players!"
 invalid-option: "&cInvalid option!"
 no-perms: "&7You don't have enough permissions!"
+invalid-player: "&cInvalid player!"
+not-online: "&cPlayer is not online!"
+tpa-sent: "&7Sent tp request to %player%"
+tpa-received: "&7You got tpa"
+tpa-done: "&7Teleported to %player%"
+tpahere-done: "&7Teleported %player% to you"
+tpahere-received: "&7You got tpahere"
+active-tpa: "&7You got an active request"
+tpa-accepted: "&7Accepted tpa"
+tpa-denied: "&7Denied tpa"
+no-request: "&7You don't have an active request"
 ```
 
 <!-- ROADMAP -->
