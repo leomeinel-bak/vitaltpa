@@ -27,23 +27,25 @@ import org.jetbrains.annotations.NotNull;
 
 public class TpaEvent extends Event implements Cancellable {
 
+	private static final HandlerList HANDLERS = new HandlerList();
 	private Player player;
 	private Location location;
-
 	private boolean isCancelled;
 
-	private static final HandlerList HANDLERS = new HandlerList();
-
-	public TpaEvent(Player player, Location location) {
+	public TpaEvent(@NotNull Player player, @NotNull Location location) {
 		this.player = player;
 		this.location = location;
+	}
+
+	public static @NotNull HandlerList getHandlerList() {
+		return HANDLERS;
 	}
 
 	public Player getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(Player player) {
+	public void setPlayer(@NotNull Player player) {
 		this.player = player;
 	}
 
@@ -51,7 +53,7 @@ public class TpaEvent extends Event implements Cancellable {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(@NotNull Location location) {
 		this.location = location;
 	}
 
@@ -68,10 +70,6 @@ public class TpaEvent extends Event implements Cancellable {
 
 	@Override
 	public @NotNull HandlerList getHandlers() {
-		return HANDLERS;
-	}
-
-	public static @NotNull HandlerList getHandlerList() {
 		return HANDLERS;
 	}
 }
