@@ -40,7 +40,6 @@ public class Cmd {
 		return false;
 	}
 
-	// Check perm
 	public static boolean checkPerm(@NotNull CommandSender sender, @NotNull String perm) {
 		if (!sender.hasPermission(perm)) {
 			Chat.sendMessage(sender, "no-perms");
@@ -49,7 +48,6 @@ public class Cmd {
 		return false;
 	}
 
-	// Check player
 	public static boolean checkSender(@NotNull CommandSender sender) {
 		if (!(sender instanceof Player)) {
 			Chat.sendMessage(sender, "player-only");

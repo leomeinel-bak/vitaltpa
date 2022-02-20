@@ -43,7 +43,7 @@ public class VitalTpaCmd implements TabExecutor {
 		if (Cmd.checkArgsLessThan(sender, args, 1)) {
 			return true;
 		}
-		// Check arg 0
+
 		switch (args[0]) {
 			case "tpa" -> doRequest(sender, args, "vitaltpa.tpa", "tpa-received");
 			case "tpahere" -> doRequest(sender, args,"vitaltpa.tpahere", "tpahere-received");
