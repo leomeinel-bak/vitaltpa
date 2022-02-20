@@ -20,7 +20,6 @@ package com.tamrielnetwork.vitaltpa.utils;
 
 import com.google.common.collect.ImmutableMap;
 import com.tamrielnetwork.vitaltpa.VitalTpa;
-import com.tamrielnetwork.vitaltpa.events.TpaEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -66,8 +65,6 @@ public class CmdSpec {
 	public static void doUnmap(Player senderPlayer, @NotNull Player player) {
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
 			if (uuidEntry.getValue().equals(senderPlayer.getUniqueId())) {
-				TpaEvent event = new TpaEvent(player, player.getLocation());
-				Bukkit.getPluginManager().callEvent(event);
 				doTpa(senderPlayer, player);
 				clearMaps(Objects.requireNonNull(Bukkit.getPlayer(uuidEntry.getKey())));
 				break;
