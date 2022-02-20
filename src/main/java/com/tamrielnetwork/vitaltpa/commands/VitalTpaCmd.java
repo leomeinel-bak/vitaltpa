@@ -45,16 +45,16 @@ public class VitalTpaCmd implements TabExecutor {
 		}
 		// Check arg 0
 		switch (args[0]) {
-			case "tpa" -> requestTpa(sender, args);
-			case "tpahere" -> requestTpaHere(sender, args);
-			case "tpyes" -> doTpRequest(false, sender, args);
-			case "tpno" -> doTpRequest(true, sender, args);
-			default -> Chat.sendMessage(sender, "invalid-option");
+			case "tpa" -> doRequest(sender, args, "vitaltpa.tpa", "tpa-received");
+			case "tpahere" -> doRequest(sender, args,"vitaltpa.tpahere", "tpahere-received");
+			case "tpyes" -> handleRequest(false, sender, args);
+			case "tpno" -> handleRequest(true, sender, args);
+			default -> Chat.sendMessage(sender, "cmd");
 		}
 		return true;
 	}
 
-	public void requestTpa(@NotNull CommandSender sender, @NotNull String[] args) {
+	public void doRequest(@NotNull CommandSender sender, @NotNull String[] args, @NotNull String perm, @NotNull String playerMessage) {
 		Player player = Bukkit.getPlayer(args[1]);
 
 		if (player == null) {
@@ -62,29 +62,14 @@ public class VitalTpaCmd implements TabExecutor {
 			return;
 		}
 
-		if (CmdSpec.isInvalidTpa(sender, args, player, "vitaltpa.tpa", 2)) {
+		if (CmdSpec.isInvalidTpa(sender, args, player, perm, 2)) {
 			return;
 		}
 
-		CmdSpec.addToMap(sender, args, "tpa-received", "tpa-sent");
+		CmdSpec.addToMap(sender, args, playerMessage, "tpa-sent");
 	}
 
-	public void requestTpaHere(@NotNull CommandSender sender, @NotNull String[] args) {
-		Player player = Bukkit.getPlayer(args[1]);
-
-		if (player == null) {
-			Chat.sendMessage(sender, "not-online");
-			return;
-		}
-
-		if (CmdSpec.isInvalidTpa(sender, args, player, "vitaltpa.tpahere", 2)) {
-			return;
-		}
-
-		CmdSpec.addToMap(sender, args, "tpahere-received", "tpa-sent");
-	}
-
-	public void doTpRequest(@NotNull Boolean cancel, @NotNull CommandSender sender, @NotNull String[] args) {
+	public void handleRequest(@NotNull Boolean cancel, @NotNull CommandSender sender, @NotNull String[] args) {
 		Player senderPlayer = (Player) sender;
 		Player player = CmdSpec.getMappedPlayer(senderPlayer);
 		if (!tpPlayerMap.containsValue(senderPlayer.getUniqueId())) {
