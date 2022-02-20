@@ -38,7 +38,7 @@ public class CmdSpec {
 	private static final HashMap<HashMap<UUID, UUID>, String> tpMap = new HashMap<>();
 	private static final VitalTpa main = JavaPlugin.getPlugin(VitalTpa.class);
 
-	public static void addToMap(@NotNull CommandSender sender, @NotNull String[] args, String playerMessage, String senderMessage) {
+	public static void addToMap(@NotNull CommandSender sender, @NotNull String[] args, @NotNull String playerMessage, @NotNull String senderMessage) {
 		Player player = Bukkit.getPlayer(args[1]);
 		Player senderPlayer = (Player) sender;
 
@@ -62,7 +62,7 @@ public class CmdSpec {
 		doTiming(sender);
 	}
 
-	public static void doUnmap(Player senderPlayer, @NotNull Player player) {
+	public static void doUnmap(@NotNull Player senderPlayer, @NotNull Player player) {
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
 			if (uuidEntry.getValue().equals(senderPlayer.getUniqueId())) {
 				doTpa(senderPlayer, player);
