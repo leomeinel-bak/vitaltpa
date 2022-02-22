@@ -16,10 +16,11 @@
  * along with this program. If not, see https://github.com/TamrielNetwork/VitalTpa/blob/main/LICENSE
  */
 
-package com.tamrielnetwork.vitaltpa.utils;
+package com.tamrielnetwork.vitaltpa.utils.commands;
 
 import com.google.common.collect.ImmutableMap;
 import com.tamrielnetwork.vitaltpa.VitalTpa;
+import com.tamrielnetwork.vitaltpa.utils.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -34,18 +35,14 @@ import java.util.UUID;
 
 public class CmdSpec {
 
-	public static final HashMap<UUID, UUID> tpPlayerMap = new HashMap<>();
+	private static final HashMap<UUID, UUID> tpPlayerMap = new HashMap<>();
 	private static final HashMap<HashMap<UUID, UUID>, String> tpMap = new HashMap<>();
 	private static final VitalTpa main = JavaPlugin.getPlugin(VitalTpa.class);
 
 	public static void addToMap(@NotNull CommandSender sender, @NotNull String[] args, @NotNull String playerMessage, @NotNull String senderMessage) {
 		Player player = Bukkit.getPlayer(args[1]);
 		Player senderPlayer = (Player) sender;
-
-		if (player == null) {
-			Chat.sendMessage(sender, "not-online");
-			return;
-		}
+		assert player != null;
 
 		if (tpPlayerMap.containsKey(senderPlayer.getUniqueId())) {
 			Chat.sendMessage(sender, "active-tpa");
@@ -78,7 +75,7 @@ public class CmdSpec {
 		tpPlayerMap.remove(senderPlayer.getUniqueId());
 	}
 
-	public static void doTiming(@NotNull CommandSender sender) {
+	private static void doTiming(@NotNull CommandSender sender) {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
@@ -104,18 +101,17 @@ public class CmdSpec {
 		}
 	}
 
-	public static boolean isInvalidTpa(@NotNull CommandSender sender, @NotNull String[] args, @NotNull Player player, @NotNull String perm, int length) {
-		if (Cmd.checkArgsGreaterThan(sender, args, length)) {
+	public static boolean isInvalidCmd(@NotNull CommandSender sender, @NotNull String[] args, Player player, @NotNull String perm, int length) {
+		if (Cmd.isArgsLengthGreaterThan(sender, args, length)) {
 			return true;
 		}
-		if (Cmd.checkSender(sender) || Cmd.checkPerm(sender, perm)) {
+		if (Cmd.isInvalidSender(sender)) {
 			return true;
 		}
-		if (player == sender) {
-			Chat.sendMessage(sender, "same-player");
+		if (Cmd.isNotPermitted(sender, perm)) {
 			return true;
 		}
-		return false;
+		return Cmd.isInvalidPlayer(sender, player);
 	}
 
 	public static Player getMappedPlayer(@NotNull Player senderPlayer) {
@@ -125,6 +121,10 @@ public class CmdSpec {
 			}
 		}
 		return null;
+	}
+
+	public static HashMap<UUID, UUID> getTpPlayerMap() {
+		return tpPlayerMap;
 	}
 
 }

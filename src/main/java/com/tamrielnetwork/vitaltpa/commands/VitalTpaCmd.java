@@ -20,8 +20,8 @@ package com.tamrielnetwork.vitaltpa.commands;
 
 import com.google.common.collect.ImmutableMap;
 import com.tamrielnetwork.vitaltpa.utils.Chat;
-import com.tamrielnetwork.vitaltpa.utils.Cmd;
-import com.tamrielnetwork.vitaltpa.utils.CmdSpec;
+import com.tamrielnetwork.vitaltpa.utils.commands.Cmd;
+import com.tamrielnetwork.vitaltpa.utils.commands.CmdSpec;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -33,14 +33,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tamrielnetwork.vitaltpa.utils.CmdSpec.tpPlayerMap;
-
 public class VitalTpaCmd implements TabExecutor {
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-		if (Cmd.checkArgsLessThan(sender, args, 1)) {
+		if (Cmd.isArgsLengthLessThan(sender, args, 1)) {
 			return true;
 		}
 
@@ -57,12 +55,7 @@ public class VitalTpaCmd implements TabExecutor {
 	public void doRequest(@NotNull CommandSender sender, @NotNull String[] args, @NotNull String perm, @NotNull String playerMessage) {
 		Player player = Bukkit.getPlayer(args[1]);
 
-		if (player == null) {
-			Chat.sendMessage(sender, "not-online");
-			return;
-		}
-
-		if (CmdSpec.isInvalidTpa(sender, args, player, perm, 2)) {
+		if (CmdSpec.isInvalidCmd(sender, args, player, perm, 2)) {
 			return;
 		}
 
@@ -72,26 +65,27 @@ public class VitalTpaCmd implements TabExecutor {
 	public void handleRequest(@NotNull Boolean cancel, @NotNull CommandSender sender, @NotNull String[] args) {
 		Player senderPlayer = (Player) sender;
 		Player player = CmdSpec.getMappedPlayer(senderPlayer);
-		if (!tpPlayerMap.containsValue(senderPlayer.getUniqueId())) {
+
+		if (!CmdSpec.getTpPlayerMap().containsValue(senderPlayer.getUniqueId())) {
 			Chat.sendMessage(senderPlayer, "no-request");
 			return;
 		}
-		if (player == null) {
-			Chat.sendMessage(sender, "not-online");
+
+		if (cancel && CmdSpec.isInvalidCmd(senderPlayer, args, player, "vitaltpa.tpno", 1)) {
 			return;
 		}
-		if (cancel && CmdSpec.isInvalidTpa(sender, args, player, "vitaltpa.tpno", 1)) {
-			return;
-		}
+
 		if (cancel) {
+			assert player != null;
 			CmdSpec.clearMaps(player);
 			Chat.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-no");
 			Chat.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-denied");
 			return;
 		}
-		if (CmdSpec.isInvalidTpa(player, args, senderPlayer, "vitaltpa.tpyes", 1)) {
+		if (CmdSpec.isInvalidCmd(senderPlayer, args, player, "vitaltpa.tpyes", 1)) {
 			return;
 		}
+		assert player != null;
 		CmdSpec.doUnmap(senderPlayer, player);
 		Chat.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-yes");
 		Chat.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-accepted");

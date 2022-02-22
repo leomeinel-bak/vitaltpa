@@ -16,15 +16,16 @@
  * along with this program. If not, see https://github.com/TamrielNetwork/VitalTpa/blob/main/LICENSE
  */
 
-package com.tamrielnetwork.vitaltpa.utils;
+package com.tamrielnetwork.vitaltpa.utils.commands;
 
+import com.tamrielnetwork.vitaltpa.utils.Chat;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class Cmd {
 
-	public static boolean checkArgsLessThan(@NotNull CommandSender sender, @NotNull String[] args, int length) {
+	public static boolean isArgsLengthLessThan(@NotNull CommandSender sender, @NotNull String[] args, int length) {
 		if (args.length < length) {
 			Chat.sendMessage(sender, "cmd");
 			return true;
@@ -32,7 +33,7 @@ public class Cmd {
 		return false;
 	}
 
-	public static boolean checkArgsGreaterThan(@NotNull CommandSender sender, @NotNull String[] args, int length) {
+	public static boolean isArgsLengthGreaterThan(@NotNull CommandSender sender, @NotNull String[] args, int length) {
 		if (args.length > length) {
 			Chat.sendMessage(sender, "cmd");
 			return true;
@@ -40,7 +41,7 @@ public class Cmd {
 		return false;
 	}
 
-	public static boolean checkPerm(@NotNull CommandSender sender, @NotNull String perm) {
+	public static boolean isNotPermitted(@NotNull CommandSender sender, @NotNull String perm) {
 		if (!sender.hasPermission(perm)) {
 			Chat.sendMessage(sender, "no-perms");
 			return true;
@@ -48,9 +49,21 @@ public class Cmd {
 		return false;
 	}
 
-	public static boolean checkSender(@NotNull CommandSender sender) {
+	public static boolean isInvalidSender(@NotNull CommandSender sender) {
 		if (!(sender instanceof Player)) {
 			Chat.sendMessage(sender, "player-only");
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isInvalidPlayer(@NotNull CommandSender sender, Player player) {
+		if (player == null) {
+			Chat.sendMessage(sender, "not-online");
+			return true;
+		}
+		if (player == sender) {
+			Chat.sendMessage(sender, "same-player");
 			return true;
 		}
 		return false;
