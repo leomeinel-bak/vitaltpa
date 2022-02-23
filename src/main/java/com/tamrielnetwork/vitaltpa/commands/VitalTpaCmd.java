@@ -38,11 +38,11 @@ public class VitalTpaCmd implements TabExecutor {
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-		if (Cmd.isArgsLengthLessThan(sender, args, 1)) {
+		if (Cmd.isArgsLengthLessThan(sender, args, 1) || Cmd.isArgsLengthGreaterThan(sender, args, 2)) {
 			return true;
 		}
 
-		switch (args[0]) {
+		switch (args[0].toLowerCase()) {
 			case "tpa" -> doRequest(sender, args, "vitaltpa.tpa", "tpa-received");
 			case "tpahere" -> doRequest(sender, args, "vitaltpa.tpahere", "tpahere-received");
 			case "tpyes" -> handleRequest(false, sender, args);
@@ -53,9 +53,13 @@ public class VitalTpaCmd implements TabExecutor {
 	}
 
 	public void doRequest(@NotNull CommandSender sender, @NotNull String[] args, @NotNull String perm, @NotNull String playerMessage) {
-		Player player = Bukkit.getPlayer(args[1]);
 
-		if (CmdSpec.isInvalidCmd(sender, args, player, perm, 2)) {
+		Player player = Bukkit.getPlayer(args[1]);
+		if (Cmd.isInvalidSender(sender)) {
+			return;
+		}
+
+		if (CmdSpec.isInvalidCmd(sender, player, perm)) {
 			return;
 		}
 
@@ -63,15 +67,23 @@ public class VitalTpaCmd implements TabExecutor {
 	}
 
 	public void handleRequest(@NotNull Boolean cancel, @NotNull CommandSender sender, @NotNull String[] args) {
+
+		if (Cmd.isInvalidSender(sender)) {
+			return;
+		}
 		Player senderPlayer = (Player) sender;
 		Player player = CmdSpec.getMappedPlayer(senderPlayer);
+
+		if (Cmd.isArgsLengthGreaterThan(sender, args, 1)) {
+			return;
+		}
 
 		if (!CmdSpec.getTpPlayerMap().containsValue(senderPlayer.getUniqueId())) {
 			Chat.sendMessage(senderPlayer, "no-request");
 			return;
 		}
 
-		if (cancel && CmdSpec.isInvalidCmd(senderPlayer, args, player, "vitaltpa.tpno", 1)) {
+		if (cancel && CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpno")) {
 			return;
 		}
 
@@ -82,9 +94,11 @@ public class VitalTpaCmd implements TabExecutor {
 			Chat.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-denied");
 			return;
 		}
-		if (CmdSpec.isInvalidCmd(senderPlayer, args, player, "vitaltpa.tpyes", 1)) {
+
+		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpyes")) {
 			return;
 		}
+
 		assert player != null;
 		CmdSpec.doUnmap(senderPlayer, player);
 		Chat.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-yes");
@@ -93,6 +107,7 @@ public class VitalTpaCmd implements TabExecutor {
 
 	@Override
 	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+
 		@Nullable List<String> tabComplete = new ArrayList<>();
 		if (args.length == 1) {
 			if (sender.hasPermission("vitaltpa.tp")) {

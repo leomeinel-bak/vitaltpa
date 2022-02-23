@@ -34,6 +34,7 @@ public class Chat {
 	private static final VitalTpa main = JavaPlugin.getPlugin(VitalTpa.class);
 
 	public static void sendMessage(@NotNull CommandSender player, @NotNull Map<String, String> placeholders, @NotNull String message) {
+
 		List<String> messages = getMessages(message);
 		for (String string : messages) {
 			for (Map.Entry<String, String> entry : placeholders.entrySet()) {
@@ -47,10 +48,12 @@ public class Chat {
 	}
 
 	public static void sendMessage(@NotNull CommandSender player, @NotNull String message) {
+
 		player.sendMessage(replaceColors(Objects.requireNonNull(main.getMessages().getMessagesConf().getString(message))));
 	}
 
 	private static List<String> getMessages(@NotNull String message) {
+
 		List<String> messages;
 		if (main.getMessages().getMessagesConf().isList(message)) {
 			messages = Objects.requireNonNull(main.getMessages().getMessagesConf().getStringList(message));
@@ -62,6 +65,7 @@ public class Chat {
 	}
 
 	public static String replaceColors(@NotNull String string) {
+
 		return ChatColor.translateAlternateColorCodes('&', string);
 	}
 

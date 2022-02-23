@@ -40,6 +40,7 @@ public class CmdSpec {
 	private static final VitalTpa main = JavaPlugin.getPlugin(VitalTpa.class);
 
 	public static void addToMap(@NotNull CommandSender sender, @NotNull String[] args, @NotNull String playerMessage, @NotNull String senderMessage) {
+
 		Player player = Bukkit.getPlayer(args[1]);
 		Player senderPlayer = (Player) sender;
 		assert player != null;
@@ -60,6 +61,7 @@ public class CmdSpec {
 	}
 
 	public static void doUnmap(@NotNull Player senderPlayer, @NotNull Player player) {
+
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
 			if (uuidEntry.getValue().equals(senderPlayer.getUniqueId())) {
 				doTpa(senderPlayer, player);
@@ -70,21 +72,26 @@ public class CmdSpec {
 	}
 
 	public static void clearMaps(@NotNull CommandSender sender) {
+
 		Player senderPlayer = (Player) sender;
 		tpMap.remove(tpPlayerMap);
 		tpPlayerMap.remove(senderPlayer.getUniqueId());
 	}
 
 	private static void doTiming(@NotNull CommandSender sender) {
+
 		new BukkitRunnable() {
+
 			@Override
 			public void run() {
+
 				clearMaps(sender);
 			}
 		}.runTaskLaterAsynchronously(main, (main.getConfig().getLong("request-expiry") * 20L));
 	}
 
 	private static void doTpa(@NotNull CommandSender sender, @NotNull Player player) {
+
 		Player senderPlayer = (Player) sender;
 		for (Map.Entry<HashMap<UUID, UUID>, String> tpEntry : tpMap.entrySet()) {
 			if (tpEntry.getValue().equals("tpa")) {
@@ -101,13 +108,8 @@ public class CmdSpec {
 		}
 	}
 
-	public static boolean isInvalidCmd(@NotNull CommandSender sender, @NotNull String[] args, Player player, @NotNull String perm, int length) {
-		if (Cmd.isArgsLengthGreaterThan(sender, args, length)) {
-			return true;
-		}
-		if (Cmd.isInvalidSender(sender)) {
-			return true;
-		}
+	public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player, @NotNull String perm) {
+
 		if (Cmd.isNotPermitted(sender, perm)) {
 			return true;
 		}
@@ -115,6 +117,7 @@ public class CmdSpec {
 	}
 
 	public static Player getMappedPlayer(@NotNull Player senderPlayer) {
+
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
 			if (uuidEntry.getValue().equals(senderPlayer.getUniqueId())) {
 				return Bukkit.getPlayer(uuidEntry.getKey());
@@ -124,6 +127,7 @@ public class CmdSpec {
 	}
 
 	public static HashMap<UUID, UUID> getTpPlayerMap() {
+
 		return tpPlayerMap;
 	}
 

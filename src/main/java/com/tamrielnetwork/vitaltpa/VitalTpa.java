@@ -53,6 +53,7 @@ public final class VitalTpa extends JavaPlugin {
 	}
 
 	public Messages getMessages() {
+
 		return messages;
 	}
 
