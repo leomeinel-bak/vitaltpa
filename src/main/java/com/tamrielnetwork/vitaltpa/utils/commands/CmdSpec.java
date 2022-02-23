@@ -50,7 +50,7 @@ public class CmdSpec {
 			return;
 		}
 		tpPlayerMap.put(senderPlayer.getUniqueId(), player.getUniqueId());
-		switch (args[0]) {
+		switch (args[0].toLowerCase()) {
 			case "tpa" -> tpMap.put(tpPlayerMap, "tpa");
 			case "tpahere" -> tpMap.put(tpPlayerMap, "tpahere");
 			default -> Chat.sendMessage(sender, "invalid-option");
