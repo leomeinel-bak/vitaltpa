@@ -6,9 +6,18 @@ authors: [ Tamriel Network ]
 website: https://tamriel.site
 description: Gives players the ability to teleport to each other.
 commands:
-  vitaltpa:
+  tpa:
     description: "Main command"
-    usage: "/vitaltpa tp/tphere <player>"
+    usage: "/tpa <player>"
+  tpahere:
+    description: "Main command"
+    usage: "/tpahere <player>"
+  tpno:
+    description: "Main command"
+    usage: "/tpno"
+  tpyes:
+    description: "Main command"
+    usage: "/tpyes"
 permissions:
   vitaltpa.tpa:
     description: "Permission to send request to teleport to others"
@@ -21,4 +30,7 @@ permissions:
     default: op
   vitaltpa.tpno:
     description: "Permission to deny teleport request"
+    default: op
+  vitaltpa.delay.bypass:
+    description: "Permission to bypass delay"
     default: op

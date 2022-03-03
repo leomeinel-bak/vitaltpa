@@ -27,7 +27,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class VitalTpaCmd implements CommandExecutor {
+public class VitalTpahereCmd implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -35,23 +35,23 @@ public class VitalTpaCmd implements CommandExecutor {
 		if (Cmd.isArgsLengthNotEqualTo(sender, args, 1)) {
 			return true;
 		}
-		doTpa(sender, args);
+		doTpahere(sender, args);
 		return true;
 	}
 
-	public void doTpa(@NotNull CommandSender sender, @NotNull String[] args) {
+	public void doTpahere(@NotNull CommandSender sender, @NotNull String[] args) {
 
 		Player player = Bukkit.getPlayer(args[0]);
 		if (Cmd.isInvalidSender(sender)) {
 			return;
 		}
 
-		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpa", false)) {
+		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpahere", false)) {
 			return;
 		}
 
 		assert player != null;
-		CmdSpec.addToMap(sender, player, "tpa-received", "tpa-sent", "tpa");
+		CmdSpec.addToMap(sender, player, "tpahere-received", "tpa-sent", "tpahere");
 	}
 
 }

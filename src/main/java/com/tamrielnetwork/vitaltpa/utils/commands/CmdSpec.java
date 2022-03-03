@@ -39,32 +39,45 @@ public class CmdSpec {
 	private static final HashMap<HashMap<UUID, UUID>, String> tpMap = new HashMap<>();
 	private static final VitalTpa main = JavaPlugin.getPlugin(VitalTpa.class);
 
-	public static void addToMap(@NotNull CommandSender sender, @NotNull String[] args, @NotNull String playerMessage, @NotNull String senderMessage) {
+	public static void doDelay(@NotNull Player senderPlayer, Player player) {
 
-		Player player = Bukkit.getPlayer(args[1]);
+		if (!player.hasPermission("vitaltpa.delay.bypass")) {
+			String timeRemaining = String.valueOf(main.getConfig().getLong("delay.time"));
+			Chat.sendMessage(player, ImmutableMap.of("%countdown%", timeRemaining), "countdown");
+			new BukkitRunnable() {
+
+				@Override
+				public void run() {
+
+					doTpa(senderPlayer, player);
+					doUnmap(senderPlayer);
+				}
+			}.runTaskLater(main, (main.getConfig().getLong("delay.time") * 20L));
+		} else {
+			doTpa(senderPlayer, player);
+			doUnmap(senderPlayer);
+		}
+	}
+
+	public static void addToMap(@NotNull CommandSender sender, @NotNull Player player, @NotNull String playerMessage, @NotNull String senderMessage, @NotNull String type) {
+
 		Player senderPlayer = (Player) sender;
-		assert player != null;
 
 		if (tpPlayerMap.containsKey(senderPlayer.getUniqueId())) {
 			Chat.sendMessage(sender, "active-tpa");
 			return;
 		}
 		tpPlayerMap.put(senderPlayer.getUniqueId(), player.getUniqueId());
-		switch (args[0].toLowerCase()) {
-			case "tpa" -> tpMap.put(tpPlayerMap, "tpa");
-			case "tpahere" -> tpMap.put(tpPlayerMap, "tpahere");
-			default -> Chat.sendMessage(sender, "invalid-option");
-		}
+		tpMap.put(tpPlayerMap, type);
 		Chat.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), playerMessage);
 		Chat.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), senderMessage);
 		doTiming(sender);
 	}
 
-	public static void doUnmap(@NotNull Player senderPlayer, @NotNull Player player) {
+	public static void doUnmap(@NotNull Player senderPlayer) {
 
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
 			if (uuidEntry.getValue().equals(senderPlayer.getUniqueId())) {
-				doTpa(senderPlayer, player);
 				clearMaps(Objects.requireNonNull(Bukkit.getPlayer(uuidEntry.getKey())));
 				break;
 			}
@@ -90,25 +103,29 @@ public class CmdSpec {
 		}.runTaskLaterAsynchronously(main, (main.getConfig().getLong("request-expiry") * 20L));
 	}
 
-	private static void doTpa(@NotNull CommandSender sender, @NotNull Player player) {
+	private static void doTpa(@NotNull Player senderPlayer, @NotNull Player player) {
 
-		Player senderPlayer = (Player) sender;
 		for (Map.Entry<HashMap<UUID, UUID>, String> tpEntry : tpMap.entrySet()) {
 			if (tpEntry.getValue().equals("tpa")) {
 				player.teleport(senderPlayer.getLocation());
-				Chat.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-done");
 				return;
 			}
 			if (tpEntry.getValue().equals("tpahere")) {
 				senderPlayer.teleport(player.getLocation());
-				Chat.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpahere-done");
 				return;
 			}
 			break;
 		}
 	}
 
-	public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player, @NotNull String perm) {
+	public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player, @NotNull String perm, boolean isConfirmation) {
+
+		Player senderPlayer = (Player) sender;
+
+		if (!getTpPlayerMap().containsValue(senderPlayer.getUniqueId()) && isConfirmation) {
+			Chat.sendMessage(senderPlayer, "no-request");
+			return true;
+		}
 
 		if (Cmd.isNotPermitted(sender, perm)) {
 			return true;

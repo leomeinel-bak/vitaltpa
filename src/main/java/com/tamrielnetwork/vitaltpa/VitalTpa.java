@@ -19,6 +19,9 @@
 package com.tamrielnetwork.vitaltpa;
 
 import com.tamrielnetwork.vitaltpa.commands.VitalTpaCmd;
+import com.tamrielnetwork.vitaltpa.commands.VitalTpahereCmd;
+import com.tamrielnetwork.vitaltpa.commands.VitalTpnoCmd;
+import com.tamrielnetwork.vitaltpa.commands.VitalTpyesCmd;
 import com.tamrielnetwork.vitaltpa.files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,8 +35,7 @@ public final class VitalTpa extends JavaPlugin {
 	@Override
 	public void onEnable() {
 
-		Objects.requireNonNull(getCommand("vitaltpa")).setExecutor(new VitalTpaCmd());
-		Objects.requireNonNull(getCommand("vitaltpa")).setTabCompleter(new VitalTpaCmd());
+		registerCommands();
 
 		saveDefaultConfig();
 
@@ -50,6 +52,14 @@ public final class VitalTpa extends JavaPlugin {
 	public void onDisable() {
 
 		Bukkit.getLogger().info("VitalTpa v" + this.getDescription().getVersion() + " disabled");
+	}
+
+	private void registerCommands() {
+
+		Objects.requireNonNull(getCommand("tpa")).setExecutor(new VitalTpaCmd());
+		Objects.requireNonNull(getCommand("tpahere")).setExecutor(new VitalTpahereCmd());
+		Objects.requireNonNull(getCommand("tpno")).setExecutor(new VitalTpnoCmd());
+		Objects.requireNonNull(getCommand("tpyes")).setExecutor(new VitalTpyesCmd());
 	}
 
 	public Messages getMessages() {

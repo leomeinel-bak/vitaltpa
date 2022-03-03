@@ -1,2 +1,8 @@
+# Command delay
+delay:
+  enabled: true
+  # time in s
+  time: 3
+
 # time in seconds
 request-expiry: 60

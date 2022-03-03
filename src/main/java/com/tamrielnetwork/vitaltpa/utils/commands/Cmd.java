@@ -25,9 +25,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class Cmd {
 
-	public static boolean isArgsLengthLessThan(@NotNull CommandSender sender, @NotNull String[] args, int length) {
+	public static boolean isArgsLengthNotEqualTo(@NotNull CommandSender sender, @NotNull String[] args, int length) {
 
-		if (args.length < length) {
+		if (args.length != length) {
 			Chat.sendMessage(sender, "cmd");
 			return true;
 		}

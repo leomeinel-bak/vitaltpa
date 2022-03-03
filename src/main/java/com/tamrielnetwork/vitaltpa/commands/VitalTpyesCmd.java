@@ -18,40 +18,44 @@
 
 package com.tamrielnetwork.vitaltpa.commands;
 
+import com.google.common.collect.ImmutableMap;
+import com.tamrielnetwork.vitaltpa.utils.Chat;
 import com.tamrielnetwork.vitaltpa.utils.commands.Cmd;
 import com.tamrielnetwork.vitaltpa.utils.commands.CmdSpec;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class VitalTpaCmd implements CommandExecutor {
+public class VitalTpyesCmd implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-		if (Cmd.isArgsLengthNotEqualTo(sender, args, 1)) {
+		if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
 			return true;
 		}
-		doTpa(sender, args);
+		doTpyes(sender);
 		return true;
 	}
 
-	public void doTpa(@NotNull CommandSender sender, @NotNull String[] args) {
+	public void doTpyes(@NotNull CommandSender sender) {
 
-		Player player = Bukkit.getPlayer(args[0]);
 		if (Cmd.isInvalidSender(sender)) {
 			return;
 		}
+		Player senderPlayer = (Player) sender;
+		Player player = CmdSpec.getMappedPlayer(senderPlayer);
 
-		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpa", false)) {
+		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpyes", true)) {
 			return;
 		}
 
 		assert player != null;
-		CmdSpec.addToMap(sender, player, "tpa-received", "tpa-sent", "tpa");
+		CmdSpec.doDelay(senderPlayer, player);
+		Chat.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-yes");
+		Chat.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-accepted");
 	}
 
 }
