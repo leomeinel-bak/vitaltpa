@@ -39,6 +39,7 @@ public class CmdSpec {
 	private static final HashMap<HashMap<UUID, UUID>, String> tpMap = new HashMap<>();
 	private static final VitalTpa main = JavaPlugin.getPlugin(VitalTpa.class);
 
+	@SuppressWarnings ("ConstantConditions")
 	public static void doDelay(Player senderPlayer, Player player) {
 
 		if (!player.hasPermission("vitaltpa.delay.bypass")) {
@@ -48,8 +49,8 @@ public class CmdSpec {
 
 				@Override
 				public void run() {
-
-					if (Cmd.isInvalidPlayer(senderPlayer, player) || Cmd.isInvalidPlayer(player, senderPlayer)) {
+					// @SuppressWarnings("ConstantConditions") - senderPlayer could be null after runnable
+					if (Cmd.isInvalidPlayer(player) || Cmd.isInvalidPlayer(senderPlayer)) {
 						return;
 					}
 

@@ -74,17 +74,9 @@ public class Cmd {
 		return false;
 	}
 
-	public static boolean isInvalidPlayer(@NotNull Player senderPlayer, Player player) {
+	public static boolean isInvalidPlayer(Player player) {
 
-		if (player == null) {
-			Chat.sendMessage(senderPlayer, "not-online");
-			return true;
-		}
-		if (player == senderPlayer) {
-			Chat.sendMessage(senderPlayer, "same-player");
-			return true;
-		}
-		return false;
+		return player == null;
 	}
 
 }
