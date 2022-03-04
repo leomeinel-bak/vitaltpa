@@ -18,8 +18,6 @@
 
 package com.tamrielnetwork.vitaltpa.commands;
 
-import com.google.common.collect.ImmutableMap;
-import com.tamrielnetwork.vitaltpa.utils.Chat;
 import com.tamrielnetwork.vitaltpa.utils.commands.Cmd;
 import com.tamrielnetwork.vitaltpa.utils.commands.CmdSpec;
 import org.bukkit.command.Command;
@@ -54,8 +52,6 @@ public class VitalTpyesCmd implements CommandExecutor {
 
 		assert player != null;
 		CmdSpec.doDelay(senderPlayer, player);
-		Chat.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-yes");
-		Chat.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-accepted");
 	}
 
 }

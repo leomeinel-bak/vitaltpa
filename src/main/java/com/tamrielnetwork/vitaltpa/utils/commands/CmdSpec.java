@@ -28,7 +28,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -38,25 +40,38 @@ public class CmdSpec {
 	private static final HashMap<UUID, UUID> tpPlayerMap = new HashMap<>();
 	private static final HashMap<HashMap<UUID, UUID>, String> tpMap = new HashMap<>();
 	private static final VitalTpa main = JavaPlugin.getPlugin(VitalTpa.class);
-	
+	private static final List<UUID> onActiveDelay = new ArrayList<>();
+
 	public static void doDelay(Player senderPlayer, Player player) {
 
 		if (!player.hasPermission("vitaltpa.delay.bypass")) {
+			if (onActiveDelay.contains(senderPlayer.getUniqueId())) {
+				Chat.sendMessage(senderPlayer, "active-delay");
+				return;
+			}
+			Chat.sendMessage(senderPlayer, ImmutableMap.of("%player%", player.getName()), "tpa-yes");
+			Chat.sendMessage(player, ImmutableMap.of("%player%", senderPlayer.getName()), "tpa-accepted");
+			onActiveDelay.add(senderPlayer.getUniqueId());
 			String timeRemaining = String.valueOf(main.getConfig().getLong("delay.time"));
 			Chat.sendMessage(player, ImmutableMap.of("%countdown%", timeRemaining), "countdown");
 			new BukkitRunnable() {
 
 				@Override
 				public void run() {
+
 					if (Cmd.isInvalidPlayer(player) || Cmd.isInvalidPlayer(senderPlayer)) {
+						onActiveDelay.remove(senderPlayer.getUniqueId());
 						return;
 					}
 
 					doTpa(senderPlayer, player);
 					doUnmap(senderPlayer);
+					onActiveDelay.remove(senderPlayer.getUniqueId());
 				}
 			}.runTaskLater(main, (main.getConfig().getLong("delay.time") * 20L));
 		} else {
+			Chat.sendMessage(senderPlayer, ImmutableMap.of("%player%", player.getName()), "tpa-yes");
+			Chat.sendMessage(player, ImmutableMap.of("%player%", senderPlayer.getName()), "tpa-accepted");
 			doTpa(senderPlayer, player);
 			doUnmap(senderPlayer);
 		}
