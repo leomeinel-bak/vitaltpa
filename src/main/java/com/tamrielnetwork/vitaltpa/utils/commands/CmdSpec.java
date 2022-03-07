@@ -130,9 +130,7 @@ public class CmdSpec {
 			}
 			if (tpEntry.getValue().equals("tpahere")) {
 				senderPlayer.teleport(player.getLocation());
-				return;
 			}
-			break;
 		}
 	}
 
@@ -161,7 +159,7 @@ public class CmdSpec {
 		return null;
 	}
 
-	public static HashMap<UUID, UUID> getTpPlayerMap() {
+	public static Map<UUID, UUID> getTpPlayerMap() {
 
 		return tpPlayerMap;
 	}
