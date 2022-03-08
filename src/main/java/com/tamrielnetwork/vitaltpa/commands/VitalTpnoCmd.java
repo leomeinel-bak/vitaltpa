@@ -27,6 +27,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 public class VitalTpnoCmd implements CommandExecutor {
 
 	@Override
@@ -53,8 +55,8 @@ public class VitalTpnoCmd implements CommandExecutor {
 
 		assert player != null;
 		CmdSpec.clearMaps(player);
-		Chat.sendMessage(sender, java.util.Map.of("%player%", player.getName()), "tpa-no");
-		Chat.sendMessage(player, java.util.Map.of("%player%", sender.getName()), "tpa-denied");
+		Chat.sendMessage(sender, Map.of("%player%", player.getName()), "tpa-no");
+		Chat.sendMessage(player, Map.of("%player%", sender.getName()), "tpa-denied");
 	}
 
 }

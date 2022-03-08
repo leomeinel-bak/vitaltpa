@@ -41,6 +41,7 @@ public class CmdSpec {
 	private static final HashMap<HashMap<UUID, UUID>, String> tpMap = new HashMap<>();
 	private static final VitalTpa main = JavaPlugin.getPlugin(VitalTpa.class);
 	private static final List<UUID> onActiveDelay = new ArrayList<>();
+
 	private CmdSpec() {
 
 		throw new IllegalStateException("Utility class");
@@ -53,11 +54,11 @@ public class CmdSpec {
 				Chat.sendMessage(senderPlayer, "active-delay");
 				return;
 			}
-			Chat.sendMessage(senderPlayer, java.util.Map.of(PLAYER, player.getName()), "tpa-yes");
-			Chat.sendMessage(player, java.util.Map.of(PLAYER, senderPlayer.getName()), "tpa-accepted");
+			Chat.sendMessage(senderPlayer, Map.of(PLAYER, player.getName()), "tpa-yes");
+			Chat.sendMessage(player, Map.of(PLAYER, senderPlayer.getName()), "tpa-accepted");
 			onActiveDelay.add(senderPlayer.getUniqueId());
 			String timeRemaining = String.valueOf(main.getConfig().getLong("delay.time"));
-			Chat.sendMessage(player, java.util.Map.of("%countdown%", timeRemaining), "countdown");
+			Chat.sendMessage(player, Map.of("%countdown%", timeRemaining), "countdown");
 			new BukkitRunnable() {
 
 				@Override
@@ -74,8 +75,8 @@ public class CmdSpec {
 				}
 			}.runTaskLater(main, (main.getConfig().getLong("delay.time") * 20L));
 		} else {
-			Chat.sendMessage(senderPlayer, java.util.Map.of(PLAYER, player.getName()), "tpa-yes");
-			Chat.sendMessage(player, java.util.Map.of(PLAYER, senderPlayer.getName()), "tpa-accepted");
+			Chat.sendMessage(senderPlayer, Map.of(PLAYER, player.getName()), "tpa-yes");
+			Chat.sendMessage(player, Map.of(PLAYER, senderPlayer.getName()), "tpa-accepted");
 			doTpa(senderPlayer, player);
 			doUnmap(senderPlayer);
 		}
@@ -91,8 +92,8 @@ public class CmdSpec {
 		}
 		tpPlayerMap.put(senderPlayer.getUniqueId(), player.getUniqueId());
 		tpMap.put(tpPlayerMap, type);
-		Chat.sendMessage(player, java.util.Map.of(PLAYER, sender.getName()), playerMessage);
-		Chat.sendMessage(sender, java.util.Map.of(PLAYER, player.getName()), senderMessage);
+		Chat.sendMessage(player, Map.of(PLAYER, sender.getName()), playerMessage);
+		Chat.sendMessage(sender, Map.of(PLAYER, player.getName()), senderMessage);
 		doTiming(sender);
 	}
 
