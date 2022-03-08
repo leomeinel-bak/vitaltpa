@@ -45,7 +45,8 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#commands-and-permissions">Commands and Permissions</a></li>
-        <li><a href="#configuration">Configuration</a></li>
+        <li><a href="#configuration - config.yml">Configuration</a></li>
+		<li><a href="#configuration - messages.yml">Configuration</a></li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -86,25 +87,37 @@ To get the plugin running on your server follow these simple steps.
 
 1. Permission: `vitaltpa.tpa`
 
-* Command: `/vitaltpa tpa <player>`
+* Command: `/tpa <player>`
 * Description: Send request to teleport to others
 
 2. Permission: `vitaltpa.tpahere`
 
-* Command: `/vitaltpa tpahere <player>`
+* Command: `/tpahere <player>`
 * Description: Send request to teleport others to you
 
 3. Permission: `vitaltpa.tpyes`
 
+* Command: `/tpyes`
 * Description: Accept teleport request
 
 4. Permission: `vitaltpa.tpno`
 
+* Command: `/tpno`
 * Description: Deny teleport request
+
+4. Permission: `vitaltpa.delay.bypass`
+
+* Description: Bypass delay
 
 ### Configuration - config.yml
 
 ```
+# Command delay
+delay:
+  enabled: true
+  # time in s
+  time: 3
+
 # time in seconds
 request-expiry: 60
 ```
@@ -112,23 +125,22 @@ request-expiry: 60
 ### Configuration - messages.yml
 
 ```
-no-args: "&7Enter this command: &b/vitaltpa tpa/tpahere <player>"
+cmd: "&fUsage: &b/tpa <player> &for &b/tpahere <player> &for &b/tpyes &for &b/tpno"
+tpa-sent: "&b%player% &fhas been sent a request"
+no-request: "&cNo active request!"
+tpa-no: "&fYou denied the request from &b%player%"
+tpa-denied: "&b%player% &fdenied your request"
+tpa-yes: "&fYou accepted the request from &b%player%"
+tpa-accepted: "&b%player% &faccepted your request"
+no-perms: "&cYou don't have enough permissions!"
 player-only: "&cThis command can only be executed by players!"
-invalid-option: "&cInvalid option!"
-no-perms: "&7You don't have enough permissions!"
-invalid-player: "&cInvalid player!"
 not-online: "&cPlayer is not online!"
-tpa-sent: "&7Sent teleport request to &b%player%"
-tpa-received: "&7You got a teleport request from &b%player%"
-tpa-done: "&7Teleported to &b%player%"
-tpahere-done: "&7Teleported &b%player%"
-tpahere-received: "&7You got a teleport request from &b%player%"
-active-tpa: "&7You already have an active teleport request"
-tpa-yes: "&7Accepted teleport request from &b%player%"
-tpa-accepted: "&b%player% &7accepted your teleport request"
-tpa-no: "&7Denied teleport request from &b%player%"
-tpa-denied: "&b%player% &7denied your teleport request"
-no-request: "&7You currently do not have an open teleport request"
+same-player: "&cYou can't send a request to yourself!"
+active-tpa: "&cYou already have an active teleport request"
+tpa-received: "&b%player% &fwants to teleport to you"
+tpahere-received: "&b%player% &fwants you to teleport to them"
+countdown: "&fTeleporting in &b%countdown% &fseconds"
+active-delay: "&cYou already accepted the request!"
 ```
 
 <!-- ROADMAP -->
