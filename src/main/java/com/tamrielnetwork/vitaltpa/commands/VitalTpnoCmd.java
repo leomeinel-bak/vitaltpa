@@ -18,7 +18,6 @@
 
 package com.tamrielnetwork.vitaltpa.commands;
 
-import com.google.common.collect.ImmutableMap;
 import com.tamrielnetwork.vitaltpa.utils.Chat;
 import com.tamrielnetwork.vitaltpa.utils.commands.Cmd;
 import com.tamrielnetwork.vitaltpa.utils.commands.CmdSpec;
@@ -34,7 +33,7 @@ public class VitalTpnoCmd implements CommandExecutor {
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
 		if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
-			return true;
+			return false;
 		}
 		doTpno(sender);
 		return true;
@@ -54,8 +53,8 @@ public class VitalTpnoCmd implements CommandExecutor {
 
 		assert player != null;
 		CmdSpec.clearMaps(player);
-		Chat.sendMessage(sender, ImmutableMap.of("%player%", player.getName()), "tpa-no");
-		Chat.sendMessage(player, ImmutableMap.of("%player%", sender.getName()), "tpa-denied");
+		Chat.sendMessage(sender, java.util.Map.of("%player%", player.getName()), "tpa-no");
+		Chat.sendMessage(player, java.util.Map.of("%player%", sender.getName()), "tpa-denied");
 	}
 
 }
