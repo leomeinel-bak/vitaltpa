@@ -105,7 +105,11 @@ To get the plugin running on your server follow these simple steps.
 * Command: `/tpno`
 * Description: Deny teleport request
 
-4. Permission: `vitaltpa.delay.bypass`
+4. Permission: `vitaltpa.tpcancel`
+
+* Description: Cancel request
+
+5. Permission: `vitaltpa.delay.bypass`
 
 * Description: Bypass delay
 
@@ -132,6 +136,7 @@ tpa-no: "&fYou denied the request from &b%player%"
 tpa-denied: "&b%player% &fdenied your request"
 tpa-yes: "&fYou accepted the request from &b%player%"
 tpa-accepted: "&b%player% &faccepted your request"
+tpa-cancelled: "&b%player% &ccancelled the request!"
 no-perms: "&cYou don't have enough permissions!"
 player-only: "&cThis command can only be executed by players!"
 not-online: "&cPlayer is not online!"
