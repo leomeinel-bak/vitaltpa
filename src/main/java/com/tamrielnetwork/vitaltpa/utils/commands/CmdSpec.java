@@ -154,11 +154,31 @@ public class CmdSpec {
 		return Cmd.isInvalidPlayer(sender, player);
 	}
 
-	public static Player getMappedPlayer(@NotNull Player senderPlayer) {
+	public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player, @NotNull String perm) {
+
+		if (!getTpPlayerMap().containsValue(player.getUniqueId())) {
+			Chat.sendMessage(player, "no-request");
+			return true;
+		}
+
+		return Cmd.isNotPermitted(sender, perm);
+	}
+
+	public static Player getPlayerKeyInMap(@NotNull Player senderPlayer) {
 
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
 			if (uuidEntry.getValue().equals(senderPlayer.getUniqueId())) {
 				return Bukkit.getPlayer(uuidEntry.getKey());
+			}
+		}
+		return null;
+	}
+
+	public static Player getPlayerValueInMap(@NotNull Player senderPlayer) {
+
+		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
+			if (uuidEntry.getKey().equals(senderPlayer.getUniqueId())) {
+				return Bukkit.getPlayer(uuidEntry.getValue());
 			}
 		}
 		return null;

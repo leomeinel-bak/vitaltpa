@@ -18,6 +18,9 @@ commands:
   tpyes:
     description: "Main command"
     usage: "/tpyes"
+  tpcancel:
+    description: "Main command"
+    usage: "/tpcancel"
 permissions:
   vitaltpa.tpa:
     description: "Permission to send request to teleport to others"
@@ -33,4 +36,7 @@ permissions:
     default: op
   vitaltpa.delay.bypass:
     description: "Permission to bypass delay"
+    default: op
+  vitaltpa.tpcancel:
+    description: "Permission to cancel a request"
     default: op

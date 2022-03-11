@@ -44,7 +44,7 @@ public class VitalTpyesCmd implements CommandExecutor {
 			return;
 		}
 		Player senderPlayer = (Player) sender;
-		Player player = CmdSpec.getMappedPlayer(senderPlayer);
+		Player player = CmdSpec.getPlayerKeyInMap(senderPlayer);
 
 		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpyes", true)) {
 			return;

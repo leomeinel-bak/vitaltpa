@@ -18,6 +18,7 @@
 
 package com.tamrielnetwork.vitaltpa;
 
+import com.tamrielnetwork.vitaltpa.commands.VitalTpCancelCmd;
 import com.tamrielnetwork.vitaltpa.commands.VitalTpaCmd;
 import com.tamrielnetwork.vitaltpa.commands.VitalTpahereCmd;
 import com.tamrielnetwork.vitaltpa.commands.VitalTpnoCmd;
@@ -60,6 +61,7 @@ public final class VitalTpa extends JavaPlugin {
 		Objects.requireNonNull(getCommand("tpahere")).setExecutor(new VitalTpahereCmd());
 		Objects.requireNonNull(getCommand("tpno")).setExecutor(new VitalTpnoCmd());
 		Objects.requireNonNull(getCommand("tpyes")).setExecutor(new VitalTpyesCmd());
+		Objects.requireNonNull(getCommand("tpcancel")).setExecutor(new VitalTpCancelCmd());
 	}
 
 	public Messages getMessages() {
