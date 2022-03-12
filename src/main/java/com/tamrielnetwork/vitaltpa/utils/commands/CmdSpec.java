@@ -43,12 +43,10 @@ public class CmdSpec {
 	private static final List<UUID> onActiveDelay = new ArrayList<>();
 
 	private CmdSpec() {
-
 		throw new IllegalStateException("Utility class");
 	}
 
 	public static void doDelay(Player senderPlayer, Player player) {
-
 		if (!player.hasPermission("vitaltpa.delay.bypass")) {
 			if (onActiveDelay.contains(senderPlayer.getUniqueId())) {
 				Chat.sendMessage(senderPlayer, "active-delay");
@@ -57,24 +55,25 @@ public class CmdSpec {
 			Chat.sendMessage(senderPlayer, Map.of(PLAYER, player.getName()), "tpa-yes");
 			Chat.sendMessage(player, Map.of(PLAYER, senderPlayer.getName()), "tpa-accepted");
 			onActiveDelay.add(senderPlayer.getUniqueId());
-			String timeRemaining = String.valueOf(main.getConfig().getLong("delay.time"));
+			String timeRemaining = String.valueOf(main.getConfig()
+			                                          .getLong("delay.time"));
 			Chat.sendMessage(player, Map.of("%countdown%", timeRemaining), "countdown");
 			new BukkitRunnable() {
 
 				@Override
 				public void run() {
-
 					if (Cmd.isInvalidPlayer(player) || Cmd.isInvalidPlayer(senderPlayer)) {
 						onActiveDelay.remove(senderPlayer.getUniqueId());
 						return;
 					}
-
 					doTpa(senderPlayer, player);
 					doUnmap(senderPlayer);
 					onActiveDelay.remove(senderPlayer.getUniqueId());
 				}
-			}.runTaskLater(main, (main.getConfig().getLong("delay.time") * 20L));
-		} else {
+			}.runTaskLater(main, (main.getConfig()
+			                          .getLong("delay.time") * 20L));
+		}
+		else {
 			Chat.sendMessage(senderPlayer, Map.of(PLAYER, player.getName()), "tpa-yes");
 			Chat.sendMessage(player, Map.of(PLAYER, senderPlayer.getName()), "tpa-accepted");
 			doTpa(senderPlayer, player);
@@ -82,10 +81,9 @@ public class CmdSpec {
 		}
 	}
 
-	public static void addToMap(@NotNull CommandSender sender, @NotNull Player player, @NotNull String playerMessage, @NotNull String senderMessage, @NotNull String type) {
-
+	public static void addToMap(@NotNull CommandSender sender, @NotNull Player player, @NotNull String playerMessage,
+	                            @NotNull String senderMessage, @NotNull String type) {
 		Player senderPlayer = (Player) sender;
-
 		if (tpPlayerMap.containsKey(senderPlayer.getUniqueId())) {
 			Chat.sendMessage(sender, "active-tpa");
 			return;
@@ -98,9 +96,9 @@ public class CmdSpec {
 	}
 
 	public static void doUnmap(@NotNull Player senderPlayer) {
-
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
-			if (uuidEntry.getValue().equals(senderPlayer.getUniqueId())) {
+			if (uuidEntry.getValue()
+			             .equals(senderPlayer.getUniqueId())) {
 				clearMaps(Objects.requireNonNull(Bukkit.getPlayer(uuidEntry.getKey())));
 				break;
 			}
@@ -108,46 +106,43 @@ public class CmdSpec {
 	}
 
 	public static void clearMaps(@NotNull CommandSender sender) {
-
 		Player senderPlayer = (Player) sender;
 		tpMap.remove(tpPlayerMap);
 		tpPlayerMap.remove(senderPlayer.getUniqueId());
 	}
 
 	private static void doTiming(@NotNull CommandSender sender) {
-
 		new BukkitRunnable() {
 
 			@Override
 			public void run() {
-
 				clearMaps(sender);
 			}
-		}.runTaskLaterAsynchronously(main, (main.getConfig().getLong("request-expiry") * 20L));
+		}.runTaskLaterAsynchronously(main, (main.getConfig()
+		                                        .getLong("request-expiry") * 20L));
 	}
 
 	private static void doTpa(@NotNull Player senderPlayer, @NotNull Player player) {
-
 		for (Map.Entry<HashMap<UUID, UUID>, String> tpEntry : tpMap.entrySet()) {
-			if (tpEntry.getValue().equals("tpa")) {
+			if (tpEntry.getValue()
+			           .equals("tpa")) {
 				player.teleport(senderPlayer.getLocation());
 				return;
 			}
-			if (tpEntry.getValue().equals("tpahere")) {
+			if (tpEntry.getValue()
+			           .equals("tpahere")) {
 				senderPlayer.teleport(player.getLocation());
 			}
 		}
 	}
 
-	public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player, @NotNull String perm, boolean isConfirmation) {
-
+	public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player, @NotNull String perm,
+	                                   boolean isConfirmation) {
 		Player senderPlayer = (Player) sender;
-
 		if (!getTpPlayerMap().containsValue(senderPlayer.getUniqueId()) && isConfirmation) {
 			Chat.sendMessage(senderPlayer, "no-request");
 			return true;
 		}
-
 		if (Cmd.isNotPermitted(sender, perm)) {
 			return true;
 		}
@@ -155,19 +150,17 @@ public class CmdSpec {
 	}
 
 	public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player, @NotNull String perm) {
-
 		if (!getTpPlayerMap().containsValue(player.getUniqueId())) {
 			Chat.sendMessage(player, "no-request");
 			return true;
 		}
-
 		return Cmd.isNotPermitted(sender, perm);
 	}
 
 	public static Player getPlayerKeyInMap(@NotNull Player senderPlayer) {
-
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
-			if (uuidEntry.getValue().equals(senderPlayer.getUniqueId())) {
+			if (uuidEntry.getValue()
+			             .equals(senderPlayer.getUniqueId())) {
 				return Bukkit.getPlayer(uuidEntry.getKey());
 			}
 		}
@@ -175,9 +168,9 @@ public class CmdSpec {
 	}
 
 	public static Player getPlayerValueInMap(@NotNull Player senderPlayer) {
-
 		for (Map.Entry<UUID, UUID> uuidEntry : tpPlayerMap.entrySet()) {
-			if (uuidEntry.getKey().equals(senderPlayer.getUniqueId())) {
+			if (uuidEntry.getKey()
+			             .equals(senderPlayer.getUniqueId())) {
 				return Bukkit.getPlayer(uuidEntry.getValue());
 			}
 		}
@@ -185,8 +178,6 @@ public class CmdSpec {
 	}
 
 	public static Map<UUID, UUID> getTpPlayerMap() {
-
 		return tpPlayerMap;
 	}
-
 }

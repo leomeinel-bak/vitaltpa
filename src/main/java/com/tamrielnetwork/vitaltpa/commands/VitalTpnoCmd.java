@@ -29,11 +29,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-public class VitalTpnoCmd implements CommandExecutor {
+public class VitalTpnoCmd
+		implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
+	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
+	                         @NotNull String[] args) {
 		if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
 			return false;
 		}
@@ -42,21 +43,17 @@ public class VitalTpnoCmd implements CommandExecutor {
 	}
 
 	public void doTpno(@NotNull CommandSender sender) {
-
 		if (Cmd.isInvalidSender(sender)) {
 			return;
 		}
 		Player senderPlayer = (Player) sender;
 		Player player = CmdSpec.getPlayerKeyInMap(senderPlayer);
-
 		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpno", true)) {
 			return;
 		}
-
 		assert player != null;
 		CmdSpec.clearMaps(player);
 		Chat.sendMessage(sender, Map.of("%player%", player.getName()), "tpa-no");
 		Chat.sendMessage(player, Map.of("%player%", sender.getName()), "tpa-denied");
 	}
-
 }

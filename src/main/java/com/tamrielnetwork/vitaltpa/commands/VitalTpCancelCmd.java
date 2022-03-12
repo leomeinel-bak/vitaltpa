@@ -29,11 +29,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-public class VitalTpCancelCmd implements CommandExecutor {
+public class VitalTpCancelCmd
+		implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
+	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
+	                         @NotNull String[] args) {
 		if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
 			return false;
 		}
@@ -42,25 +43,20 @@ public class VitalTpCancelCmd implements CommandExecutor {
 	}
 
 	public void doTpCancel(@NotNull CommandSender sender) {
-
 		if (Cmd.isInvalidSender(sender)) {
 			return;
 		}
 		Player senderPlayer = (Player) sender;
 		Player player = CmdSpec.getPlayerValueInMap(senderPlayer);
-
 		if (player == null) {
 			Chat.sendMessage(sender, "no-request");
 			return;
 		}
-
 		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpcancel")) {
 			return;
 		}
-
 		CmdSpec.doUnmap(player);
 		Chat.sendMessage(sender, Map.of("%player%", senderPlayer.getName()), "tpa-cancelled");
 		Chat.sendMessage(player, Map.of("%player%", senderPlayer.getName()), "tpa-cancelled");
 	}
-
 }

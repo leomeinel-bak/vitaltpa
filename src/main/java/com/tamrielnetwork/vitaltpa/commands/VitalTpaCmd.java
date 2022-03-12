@@ -27,11 +27,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class VitalTpaCmd implements CommandExecutor {
+public class VitalTpaCmd
+		implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
+	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
+	                         @NotNull String[] args) {
 		if (Cmd.isArgsLengthNotEqualTo(sender, args, 1)) {
 			return false;
 		}
@@ -40,18 +41,14 @@ public class VitalTpaCmd implements CommandExecutor {
 	}
 
 	public void doTpa(@NotNull CommandSender sender, @NotNull String[] args) {
-
 		Player player = Bukkit.getPlayer(args[0]);
 		if (Cmd.isInvalidSender(sender)) {
 			return;
 		}
-
 		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpa", false)) {
 			return;
 		}
-
 		assert player != null;
 		CmdSpec.addToMap(sender, player, "tpa-received", "tpa-sent", "tpa");
 	}
-
 }
