@@ -143,10 +143,7 @@ public class CmdSpec {
 			Chat.sendMessage(senderPlayer, "no-request");
 			return true;
 		}
-		if (Cmd.isNotPermitted(sender, perm)) {
-			return true;
-		}
-		return Cmd.isInvalidPlayer(sender, player);
+		return Cmd.isNotPermitted(sender, perm) || Cmd.isInvalidPlayer(sender, player);
 	}
 
 	public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player, @NotNull String perm) {
