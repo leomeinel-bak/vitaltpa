@@ -16,10 +16,10 @@
  * along with this program. If not, see https://github.com/LeoMeinel/VitalTpa/blob/main/LICENSE
  */
 
-package com.tamrielnetwork.vitaltpa.utils.commands;
+package dev.meinel.leo.vitaltpa.utils.commands;
 
-import com.tamrielnetwork.vitaltpa.VitalTpa;
-import com.tamrielnetwork.vitaltpa.utils.Chat;
+import dev.meinel.leo.vitaltpa.VitalTpa;
+import dev.meinel.leo.vitaltpa.utils.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

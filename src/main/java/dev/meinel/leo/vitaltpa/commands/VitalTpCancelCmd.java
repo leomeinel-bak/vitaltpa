@@ -16,11 +16,11 @@
  * along with this program. If not, see https://github.com/LeoMeinel/VitalTpa/blob/main/LICENSE
  */
 
-package com.tamrielnetwork.vitaltpa.commands;
+package dev.meinel.leo.vitaltpa.commands;
 
-import com.tamrielnetwork.vitaltpa.utils.Chat;
-import com.tamrielnetwork.vitaltpa.utils.commands.Cmd;
-import com.tamrielnetwork.vitaltpa.utils.commands.CmdSpec;
+import dev.meinel.leo.vitaltpa.utils.Chat;
+import dev.meinel.leo.vitaltpa.utils.commands.Cmd;
+import dev.meinel.leo.vitaltpa.utils.commands.CmdSpec;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

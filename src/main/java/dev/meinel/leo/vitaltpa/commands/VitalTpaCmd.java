@@ -16,44 +16,39 @@
  * along with this program. If not, see https://github.com/LeoMeinel/VitalTpa/blob/main/LICENSE
  */
 
-package com.tamrielnetwork.vitaltpa.commands;
+package dev.meinel.leo.vitaltpa.commands;
 
-import com.tamrielnetwork.vitaltpa.utils.Chat;
-import com.tamrielnetwork.vitaltpa.utils.commands.Cmd;
-import com.tamrielnetwork.vitaltpa.utils.commands.CmdSpec;
+import dev.meinel.leo.vitaltpa.utils.commands.Cmd;
+import dev.meinel.leo.vitaltpa.utils.commands.CmdSpec;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-
-public class VitalTpnoCmd
+public class VitalTpaCmd
 		implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
 	                         @NotNull String[] args) {
-		if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
+		if (Cmd.isArgsLengthNotEqualTo(sender, args, 1)) {
 			return false;
 		}
-		doTpno(sender);
+		doTpa(sender, args);
 		return true;
 	}
 
-	public void doTpno(@NotNull CommandSender sender) {
+	public void doTpa(@NotNull CommandSender sender, @NotNull String[] args) {
+		Player player = Bukkit.getPlayer(args[0]);
 		if (Cmd.isInvalidSender(sender)) {
 			return;
 		}
-		Player senderPlayer = (Player) sender;
-		Player player = CmdSpec.getPlayerKeyInMap(senderPlayer);
-		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpno", true)) {
+		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpa", false)) {
 			return;
 		}
 		assert player != null;
-		CmdSpec.clearMaps(player);
-		Chat.sendMessage(sender, Map.of("%player%", player.getName()), "tpa-no");
-		Chat.sendMessage(player, Map.of("%player%", sender.getName()), "tpa-denied");
+		CmdSpec.addToMap(sender, player, "tpa-received", "tpa-sent", "tpa");
 	}
 }

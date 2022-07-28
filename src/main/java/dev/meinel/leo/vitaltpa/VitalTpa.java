@@ -16,14 +16,14 @@
  * along with this program. If not, see https://github.com/LeoMeinel/VitalTpa/blob/main/LICENSE
  */
 
-package com.tamrielnetwork.vitaltpa;
+package dev.meinel.leo.vitaltpa;
 
-import com.tamrielnetwork.vitaltpa.commands.VitalTpCancelCmd;
-import com.tamrielnetwork.vitaltpa.commands.VitalTpaCmd;
-import com.tamrielnetwork.vitaltpa.commands.VitalTpahereCmd;
-import com.tamrielnetwork.vitaltpa.commands.VitalTpnoCmd;
-import com.tamrielnetwork.vitaltpa.commands.VitalTpyesCmd;
-import com.tamrielnetwork.vitaltpa.files.Messages;
+import dev.meinel.leo.vitaltpa.commands.VitalTpCancelCmd;
+import dev.meinel.leo.vitaltpa.commands.VitalTpaCmd;
+import dev.meinel.leo.vitaltpa.commands.VitalTpahereCmd;
+import dev.meinel.leo.vitaltpa.commands.VitalTpnoCmd;
+import dev.meinel.leo.vitaltpa.commands.VitalTpyesCmd;
+import dev.meinel.leo.vitaltpa.files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 

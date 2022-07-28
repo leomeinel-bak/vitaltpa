@@ -16,39 +16,39 @@
  * along with this program. If not, see https://github.com/LeoMeinel/VitalTpa/blob/main/LICENSE
  */
 
-package com.tamrielnetwork.vitaltpa.commands;
+package dev.meinel.leo.vitaltpa.commands;
 
-import com.tamrielnetwork.vitaltpa.utils.commands.Cmd;
-import com.tamrielnetwork.vitaltpa.utils.commands.CmdSpec;
+import dev.meinel.leo.vitaltpa.utils.commands.Cmd;
+import dev.meinel.leo.vitaltpa.utils.commands.CmdSpec;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class VitalTpyesCmd
+public class VitalTpahereCmd
 		implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
 	                         @NotNull String[] args) {
-		if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
+		if (Cmd.isArgsLengthNotEqualTo(sender, args, 1)) {
 			return false;
 		}
-		doTpyes(sender);
+		doTpahere(sender, args);
 		return true;
 	}
 
-	public void doTpyes(@NotNull CommandSender sender) {
+	public void doTpahere(@NotNull CommandSender sender, @NotNull String[] args) {
+		Player player = Bukkit.getPlayer(args[0]);
 		if (Cmd.isInvalidSender(sender)) {
 			return;
 		}
-		Player senderPlayer = (Player) sender;
-		Player player = CmdSpec.getPlayerKeyInMap(senderPlayer);
-		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpyes", true)) {
+		if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpahere", false)) {
 			return;
 		}
 		assert player != null;
-		CmdSpec.doDelay(senderPlayer, player);
+		CmdSpec.addToMap(sender, player, "tpahere-received", "tpa-sent", "tpahere");
 	}
 }
