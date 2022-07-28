@@ -10,7 +10,7 @@
 <!--suppress ALL -->
 <br />
 <p align="center">
-  <a href="https://github.com/TamrielNetwork/VitalTpa">
+  <a href="https://github.com/LeoMeinel/VitalTpa">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -19,14 +19,14 @@
   <p align="center">
     Ask for teleport on Spigot and Paper
     <br />
-    <a href="https://github.com/TamrielNetwork/VitalTpa"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/LeoMeinel/VitalTpa"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/TamrielNetwork/VitalTpa">View Demo</a>
+    <a href="https://github.com/LeoMeinel/VitalTpa">View Demo</a>
     ·
-    <a href="https://github.com/TamrielNetwork/VitalTpa/issues">Report Bug</a>
+    <a href="https://github.com/LeoMeinel/VitalTpa/issues">Report Bug</a>
     ·
-    <a href="https://github.com/TamrielNetwork/VitalTpa/issues">Request Feature</a>
+    <a href="https://github.com/LeoMeinel/VitalTpa/issues">Request Feature</a>
   </p>
 
 <!-- TABLE OF CONTENTS -->
@@ -152,7 +152,7 @@ active-delay: "&cYou already accepted the request!"
 
 ## Roadmap
 
-See the [open issues](https://github.com/TamrielNetwork/VitalTpa/issues) for a list of proposed features (and known
+See the [open issues](https://github.com/LeoMeinel/VitalTpa/issues) for a list of proposed features (and known
 issues).
 
 <!-- CONTRIBUTING -->
@@ -182,7 +182,7 @@ Leopold Meinel - [@TamrielN](https://twitter.com/TamrielN) - Twitter
 
 Leopold Meinel - [contact@tamriel.me](mailto:contact@tamriel.me) - eMail
 
-Project Link - [VitalTpa](https://github.com/TamrielNetwork/VitalTpa) - GitHub
+Project Link - [VitalTpa](https://github.com/LeoMeinel/VitalTpa) - GitHub
 
 <!-- ACKNOWLEDGEMENTS -->
 
@@ -192,26 +192,26 @@ Project Link - [VitalTpa](https://github.com/TamrielNetwork/VitalTpa) - GitHub
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors-anon/TamrielNetwork/VitalTpa?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors-anon/LeoMeinel/VitalTpa?style=for-the-badge
 
-[contributors-url]: https://github.com/TamrielNetwork/VitalTpa/graphs/contributors
+[contributors-url]: https://github.com/LeoMeinel/VitalTpa/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/TamrielNetwork/VitalTpa?label=Forks&style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/LeoMeinel/VitalTpa?label=Forks&style=for-the-badge
 
-[forks-url]: https://github.com/TamrielNetwork/VitalTpa/network/members
+[forks-url]: https://github.com/LeoMeinel/VitalTpa/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/TamrielNetwork/VitalTpa?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/LeoMeinel/VitalTpa?style=for-the-badge
 
-[stars-url]: https://github.com/TamrielNetwork/VitalTpa/stargazers
+[stars-url]: https://github.com/LeoMeinel/VitalTpa/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/TamrielNetwork/VitalTpa?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/LeoMeinel/VitalTpa?style=for-the-badge
 
-[issues-url]: https://github.com/TamrielNetwork/VitalTpa/issues
+[issues-url]: https://github.com/LeoMeinel/VitalTpa/issues
 
-[license-shield]: https://img.shields.io/github/license/TamrielNetwork/VitalTpa?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/LeoMeinel/VitalTpa?style=for-the-badge
 
-[license-url]: https://github.com/TamrielNetwork/VitalTpa/blob/main/LICENSE
+[license-url]: https://github.com/LeoMeinel/VitalTpa/blob/main/LICENSE
 
-[quality-shield]: https://img.shields.io/codefactor/grade/github/TamrielNetwork/VitalTpa?style=for-the-badge
+[quality-shield]: https://img.shields.io/codefactor/grade/github/LeoMeinel/VitalTpa?style=for-the-badge
 
-[quality-url]: https://www.codefactor.io/repository/github/TamrielNetwork/VitalTpa
+[quality-url]: https://www.codefactor.io/repository/github/LeoMeinel/VitalTpa
