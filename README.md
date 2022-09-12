@@ -1,4 +1,5 @@
 <!-- PROJECT SHIELDS -->
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -69,13 +70,13 @@ This plugin is perfect for any server wanting their players to have an easy way 
 
 ### Features
 
-* Send request to teleport to others
-* Send request to teleport others to you
+- Send request to teleport to others
+- Send request to teleport others to you
 
 ### Built With
 
-* [Gradle 7](https://docs.gradle.org/7.4/release-notes.html)
-* [OpenJDK 17](https://openjdk.java.net/projects/jdk/17/)
+- [Gradle 7](https://docs.gradle.org/7.4/release-notes.html)
+- [OpenJDK 17](https://openjdk.java.net/projects/jdk/17/)
 
 <!-- GETTING STARTED -->
 
@@ -87,31 +88,31 @@ To get the plugin running on your server follow these simple steps.
 
 1. Permission: `vitaltpa.tpa`
 
-* Command: `/tpa <player>`
-* Description: Send request to teleport to others
+- Command: `/tpa <player>`
+- Description: Send request to teleport to others
 
 2. Permission: `vitaltpa.tpahere`
 
-* Command: `/tpahere <player>`
-* Description: Send request to teleport others to you
+- Command: `/tpahere <player>`
+- Description: Send request to teleport others to you
 
 3. Permission: `vitaltpa.tpyes`
 
-* Command: `/tpyes`
-* Description: Accept teleport request
+- Command: `/tpyes`
+- Description: Accept teleport request
 
 4. Permission: `vitaltpa.tpno`
 
-* Command: `/tpno`
-* Description: Deny teleport request
+- Command: `/tpno`
+- Description: Deny teleport request
 
 4. Permission: `vitaltpa.tpcancel`
 
-* Description: Cancel request
+- Description: Cancel request
 
 5. Permission: `vitaltpa.delay.bypass`
 
-* Description: Bypass delay
+- Description: Bypass delay
 
 ### Configuration - config.yml
 
@@ -186,30 +187,19 @@ Project Link - [VitalTpa](https://github.com/LeoMeinel/VitalTpa) - GitHub
 
 ### Acknowledgements
 
-* [README.md - othneildrew](https://github.com/othneildrew/Best-README-Template)
+- [README.md - othneildrew](https://github.com/othneildrew/Best-README-Template)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [contributors-shield]: https://img.shields.io/github/contributors-anon/LeoMeinel/VitalTpa?style=for-the-badge
-
 [contributors-url]: https://github.com/LeoMeinel/VitalTpa/graphs/contributors
-
 [forks-shield]: https://img.shields.io/github/forks/LeoMeinel/VitalTpa?label=Forks&style=for-the-badge
-
 [forks-url]: https://github.com/LeoMeinel/VitalTpa/network/members
-
 [stars-shield]: https://img.shields.io/github/stars/LeoMeinel/VitalTpa?style=for-the-badge
-
 [stars-url]: https://github.com/LeoMeinel/VitalTpa/stargazers
-
 [issues-shield]: https://img.shields.io/github/issues/LeoMeinel/VitalTpa?style=for-the-badge
-
 [issues-url]: https://github.com/LeoMeinel/VitalTpa/issues
-
 [license-shield]: https://img.shields.io/github/license/LeoMeinel/VitalTpa?style=for-the-badge
-
 [license-url]: https://github.com/LeoMeinel/VitalTpa/blob/main/LICENSE
-
 [quality-shield]: https://img.shields.io/codefactor/grade/github/LeoMeinel/VitalTpa?style=for-the-badge
-
 [quality-url]: https://www.codefactor.io/repository/github/LeoMeinel/VitalTpa
