@@ -20,29 +20,29 @@ import org.jetbrains.annotations.NotNull;
 
 public class VitalTpyesCmd implements CommandExecutor {
 
-  @Override
-  public boolean onCommand(
-      @NotNull CommandSender sender,
-      @NotNull Command command,
-      @NotNull String label,
-      @NotNull String[] args) {
-    if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
-      return false;
+    @Override
+    public boolean onCommand(
+            @NotNull CommandSender sender,
+            @NotNull Command command,
+            @NotNull String label,
+            @NotNull String[] args) {
+        if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
+            return false;
+        }
+        doTpyes(sender);
+        return true;
     }
-    doTpyes(sender);
-    return true;
-  }
 
-  public void doTpyes(@NotNull CommandSender sender) {
-    if (Cmd.isInvalidSender(sender)) {
-      return;
+    public void doTpyes(@NotNull CommandSender sender) {
+        if (Cmd.isInvalidSender(sender)) {
+            return;
+        }
+        Player senderPlayer = (Player) sender;
+        Player player = CmdSpec.getPlayerKeyInMap(senderPlayer);
+        if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpyes", true)) {
+            return;
+        }
+        assert player != null;
+        CmdSpec.doDelay(senderPlayer, player);
     }
-    Player senderPlayer = (Player) sender;
-    Player player = CmdSpec.getPlayerKeyInMap(senderPlayer);
-    if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpyes", true)) {
-      return;
-    }
-    assert player != null;
-    CmdSpec.doDelay(senderPlayer, player);
-  }
 }

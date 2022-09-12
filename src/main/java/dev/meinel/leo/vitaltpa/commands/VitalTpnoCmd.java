@@ -22,34 +22,34 @@ import org.jetbrains.annotations.NotNull;
 
 public class VitalTpnoCmd implements CommandExecutor {
 
-  @Override
-  public boolean onCommand(
-      @NotNull CommandSender sender,
-      @NotNull Command command,
-      @NotNull String label,
-      @NotNull String[] args) {
-    if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
-      return false;
+    @Override
+    public boolean onCommand(
+            @NotNull CommandSender sender,
+            @NotNull Command command,
+            @NotNull String label,
+            @NotNull String[] args) {
+        if (Cmd.isArgsLengthNotEqualTo(sender, args, 0)) {
+            return false;
+        }
+        doTpno(sender);
+        return true;
     }
-    doTpno(sender);
-    return true;
-  }
 
-  public void doTpno(@NotNull CommandSender sender) {
-    if (Cmd.isInvalidSender(sender)) {
-      return;
+    public void doTpno(@NotNull CommandSender sender) {
+        if (Cmd.isInvalidSender(sender)) {
+            return;
+        }
+        Player senderPlayer = (Player) sender;
+        Player player = CmdSpec.getPlayerKeyInMap(senderPlayer);
+        if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpno", true)) {
+            return;
+        }
+        assert player != null;
+        CmdSpec.clearMaps(player);
+        Chat.sendMessage(sender, Map.of("%player%", player.getName()), "tpa-no");
+        Chat.sendMessage(
+                player,
+                Map.of("%player%", sender.getName()),
+                "tpa-denied");
     }
-    Player senderPlayer = (Player) sender;
-    Player player = CmdSpec.getPlayerKeyInMap(senderPlayer);
-    if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpno", true)) {
-      return;
-    }
-    assert player != null;
-    CmdSpec.clearMaps(player);
-    Chat.sendMessage(sender, Map.of("%player%", player.getName()), "tpa-no");
-    Chat.sendMessage(
-        player,
-        Map.of("%player%", sender.getName()),
-        "tpa-denied");
-  }
 }

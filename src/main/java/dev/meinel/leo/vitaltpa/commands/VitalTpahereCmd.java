@@ -21,28 +21,28 @@ import org.jetbrains.annotations.NotNull;
 
 public class VitalTpahereCmd implements CommandExecutor {
 
-  @Override
-  public boolean onCommand(
-      @NotNull CommandSender sender,
-      @NotNull Command command,
-      @NotNull String label,
-      @NotNull String[] args) {
-    if (Cmd.isArgsLengthNotEqualTo(sender, args, 1)) {
-      return false;
+    @Override
+    public boolean onCommand(
+            @NotNull CommandSender sender,
+            @NotNull Command command,
+            @NotNull String label,
+            @NotNull String[] args) {
+        if (Cmd.isArgsLengthNotEqualTo(sender, args, 1)) {
+            return false;
+        }
+        doTpahere(sender, args);
+        return true;
     }
-    doTpahere(sender, args);
-    return true;
-  }
 
-  public void doTpahere(@NotNull CommandSender sender, @NotNull String[] args) {
-    Player player = Bukkit.getPlayer(args[0]);
-    if (Cmd.isInvalidSender(sender)) {
-      return;
+    public void doTpahere(@NotNull CommandSender sender, @NotNull String[] args) {
+        Player player = Bukkit.getPlayer(args[0]);
+        if (Cmd.isInvalidSender(sender)) {
+            return;
+        }
+        if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpahere", false)) {
+            return;
+        }
+        assert player != null;
+        CmdSpec.addToMap(sender, player, "tpahere-received", "tpa-sent", "tpahere");
     }
-    if (CmdSpec.isInvalidCmd(sender, player, "vitaltpa.tpahere", false)) {
-      return;
-    }
-    assert player != null;
-    CmdSpec.addToMap(sender, player, "tpahere-received", "tpa-sent", "tpahere");
-  }
 }
