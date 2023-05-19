@@ -2,7 +2,7 @@
  * File: VitalTpa.java
  * Author: Leopold Meinel (leo@meinel.dev)
  * -----
- * Copyright (c) 2022 Leopold Meinel & contributors
+ * Copyright (c) 2023 Leopold Meinel & contributors
  * SPDX ID: GPL-3.0-or-later
  * URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html
  * -----
@@ -31,7 +31,7 @@ public final class VitalTpa extends JavaPlugin {
         messages = new Messages();
         Bukkit
                 .getLogger()
-                .info("VitalTpa v" + this.getDescription().getVersion() + " enabled");
+                .info("VitalTpa v" + this.getPluginMeta().getVersion() + " enabled");
         Bukkit.getLogger().info("Copyright (C) 2022 Leopold Meinel");
         Bukkit.getLogger().info("This program comes with ABSOLUTELY NO WARRANTY!");
         Bukkit
@@ -48,7 +48,7 @@ public final class VitalTpa extends JavaPlugin {
     public void onDisable() {
         Bukkit
                 .getLogger()
-                .info("VitalTpa v" + this.getDescription().getVersion() + " disabled");
+                .info("VitalTpa v" + this.getPluginMeta().getVersion() + " disabled");
     }
 
     private void registerCommands() {
