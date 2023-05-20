@@ -2,7 +2,7 @@
  * File: CmdSpec.java
  * Author: Leopold Meinel (leo@meinel.dev)
  * -----
- * Copyright (c) 2022 Leopold Meinel & contributors
+ * Copyright (c) 2023 Leopold Meinel & contributors
  * SPDX ID: GPL-3.0-or-later
  * URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html
  * -----
@@ -43,21 +43,11 @@ public class CmdSpec {
                 Chat.sendMessage(senderPlayer, "active-delay");
                 return;
             }
-            Chat.sendMessage(
-                    senderPlayer,
-                    Map.of(PLAYER, player.getName()),
-                    "tpa-yes");
-            Chat.sendMessage(
-                    player,
-                    Map.of(PLAYER, senderPlayer.getName()),
-                    "tpa-accepted");
+            Chat.sendMessage(senderPlayer, Map.of(PLAYER, player.getName()), "tpa-yes");
+            Chat.sendMessage(player, Map.of(PLAYER, senderPlayer.getName()), "tpa-accepted");
             onActiveDelay.add(senderPlayer.getUniqueId());
-            String timeRemaining = String.valueOf(
-                    main.getConfig().getLong("delay.time"));
-            Chat.sendMessage(
-                    player,
-                    Map.of("%countdown%", timeRemaining),
-                    "countdown");
+            String timeRemaining = String.valueOf(main.getConfig().getLong("delay.time"));
+            Chat.sendMessage(player, Map.of("%countdown%", timeRemaining), "countdown");
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -69,28 +59,17 @@ public class CmdSpec {
                     doUnmap(senderPlayer);
                     onActiveDelay.remove(senderPlayer.getUniqueId());
                 }
-            }
-                    .runTaskLater(main, (main.getConfig().getLong("delay.time") * 20L));
+            }.runTaskLater(main, (main.getConfig().getLong("delay.time") * 20L));
         } else {
-            Chat.sendMessage(
-                    senderPlayer,
-                    Map.of(PLAYER, player.getName()),
-                    "tpa-yes");
-            Chat.sendMessage(
-                    player,
-                    Map.of(PLAYER, senderPlayer.getName()),
-                    "tpa-accepted");
+            Chat.sendMessage(senderPlayer, Map.of(PLAYER, player.getName()), "tpa-yes");
+            Chat.sendMessage(player, Map.of(PLAYER, senderPlayer.getName()), "tpa-accepted");
             doTpa(senderPlayer, player);
             doUnmap(senderPlayer);
         }
     }
 
-    public static void addToMap(
-            @NotNull CommandSender sender,
-            @NotNull Player player,
-            @NotNull String playerMessage,
-            @NotNull String senderMessage,
-            @NotNull String type) {
+    public static void addToMap(@NotNull CommandSender sender, @NotNull Player player,
+            @NotNull String playerMessage, @NotNull String senderMessage, @NotNull String type) {
         Player senderPlayer = (Player) sender;
         if (tpPlayerMap.containsKey(senderPlayer.getUniqueId())) {
             Chat.sendMessage(sender, "active-tpa");
@@ -124,15 +103,10 @@ public class CmdSpec {
             public void run() {
                 clearMaps(sender);
             }
-        }
-                .runTaskLaterAsynchronously(
-                        main,
-                        (main.getConfig().getLong("request-expiry") * 20L));
+        }.runTaskLaterAsynchronously(main, (main.getConfig().getLong("request-expiry") * 20L));
     }
 
-    private static void doTpa(
-            @NotNull Player senderPlayer,
-            @NotNull Player player) {
+    private static void doTpa(@NotNull Player senderPlayer, @NotNull Player player) {
         for (Map.Entry<HashMap<UUID, UUID>, String> tpEntry : tpMap.entrySet()) {
             if (tpEntry.getValue().equals("tpa")) {
                 player.teleport(senderPlayer.getLocation());
@@ -144,23 +118,17 @@ public class CmdSpec {
         }
     }
 
-    public static boolean isInvalidCmd(
-            @NotNull CommandSender sender,
-            Player player,
-            @NotNull String perm,
-            boolean isConfirmation) {
+    public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player,
+            @NotNull String perm, boolean isConfirmation) {
         Player senderPlayer = (Player) sender;
-        if (!getTpPlayerMap().containsValue(senderPlayer.getUniqueId()) &&
-                isConfirmation) {
+        if (!getTpPlayerMap().containsValue(senderPlayer.getUniqueId()) && isConfirmation) {
             Chat.sendMessage(senderPlayer, "no-request");
             return true;
         }
         return (Cmd.isNotPermitted(sender, perm) || Cmd.isInvalidPlayer(sender, player));
     }
 
-    public static boolean isInvalidCmd(
-            @NotNull CommandSender sender,
-            Player player,
+    public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player,
             @NotNull String perm) {
         if (!getTpPlayerMap().containsValue(player.getUniqueId())) {
             Chat.sendMessage(player, "no-request");

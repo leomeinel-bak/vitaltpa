@@ -2,7 +2,7 @@
  * File: Cmd.java
  * Author: Leopold Meinel (leo@meinel.dev)
  * -----
- * Copyright (c) 2022 Leopold Meinel & contributors
+ * Copyright (c) 2023 Leopold Meinel & contributors
  * SPDX ID: GPL-3.0-or-later
  * URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html
  * -----
@@ -21,10 +21,8 @@ public class Cmd {
         throw new IllegalStateException("Utility class");
     }
 
-    public static boolean isArgsLengthNotEqualTo(
-            @NotNull CommandSender sender,
-            @NotNull String[] args,
-            int length) {
+    public static boolean isArgsLengthNotEqualTo(@NotNull CommandSender sender,
+            @NotNull String[] args, int length) {
         if (args.length != length) {
             Chat.sendMessage(sender, "cmd");
             return true;
@@ -32,9 +30,7 @@ public class Cmd {
         return false;
     }
 
-    public static boolean isNotPermitted(
-            @NotNull CommandSender sender,
-            @NotNull String perm) {
+    public static boolean isNotPermitted(@NotNull CommandSender sender, @NotNull String perm) {
         if (!sender.hasPermission(perm)) {
             Chat.sendMessage(sender, "no-perms");
             return true;
@@ -50,9 +46,7 @@ public class Cmd {
         return false;
     }
 
-    public static boolean isInvalidPlayer(
-            @NotNull CommandSender sender,
-            Player player) {
+    public static boolean isInvalidPlayer(@NotNull CommandSender sender, Player player) {
         if (player == null) {
             Chat.sendMessage(sender, "not-online");
             return true;
