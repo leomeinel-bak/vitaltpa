@@ -102,7 +102,6 @@ request-expiry: 60
 ### Configuration - messages.yml
 
 ```yaml
-cmd: "&fUsage: &b/tpa <player> &for &b/tpahere <player> &for &b/tpyes &for &b/tpno"
 tpa-sent: "&b%player% &fhas been sent a request"
 no-request: "&cNo active request!"
 tpa-no: "&fYou denied the request from &b%player%"
