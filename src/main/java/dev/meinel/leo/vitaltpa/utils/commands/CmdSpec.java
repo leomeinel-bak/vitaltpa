@@ -125,7 +125,7 @@ public class CmdSpec {
             Chat.sendMessage(senderPlayer, "no-request");
             return true;
         }
-        return (Cmd.isNotPermitted(sender, perm) || Cmd.isInvalidPlayer(sender, player));
+        return (!Cmd.isPermitted(sender, perm) || Cmd.isInvalidPlayer(sender, player));
     }
 
     public static boolean isInvalidCmd(@NotNull CommandSender sender, Player player,
@@ -134,7 +134,7 @@ public class CmdSpec {
             Chat.sendMessage(player, "no-request");
             return true;
         }
-        return Cmd.isNotPermitted(sender, perm);
+        return !Cmd.isPermitted(sender, perm);
     }
 
     public static Player getPlayerKeyInMap(@NotNull Player senderPlayer) {
